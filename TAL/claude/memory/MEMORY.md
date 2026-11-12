@@ -1,0 +1,7 @@
+- [T.A.L. design skill](tal-apple-design-skill.md) — motion/UI work uses ~/.claude/skills/tal-apple-design; identity wins conflicts
+- [DSL-AC88U router findings](dsl-ac88u-router-findings.md) — custom .w reboot hunt: ESP32 UART logger, dhd dongle-trap restart path, ECC 0x1c000
+- [DSL-AC88U RE methodology](dsl-ac88u-re-methodology.md) — standing goal: finish LAN+WiFi DT/drivers (not just skeleton); read every RE file fully, no skipping
+- [T.A.L. brand identity](tal-brand-identity.md) — identity doc for all of C:\dev; name kept as Totally Accurate Labs; T.A.P.E.S. naming
+- [T.A.L. plugin environment](tal-plugin-environment.md) — Python via py only, brand fonts missing, which plugins stay enabled
+- [T.A.C.T.S. session routing](tacts-session-routing.md) — every T.A.C.T.S. request goes to its topic's session: UI, REC, ENCODE, GERAL
+- [T.A.R.K.A.S. session routing](tarkas-session-routing.md) — every T.A.R.K.A.S. request goes to its topic's session: Player, Biblioteca, Equalizador, Assistente
