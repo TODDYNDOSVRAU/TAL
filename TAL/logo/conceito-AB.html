@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Logo T.A.L. — conceito A + B</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=block" rel="stylesheet">
+<style>
+  :root { --black:#080808; --white:#F2F2F0; --gray:#6B6B6B; --gray-dark:#8C8C8C; --lime:#C7FF32; --line:rgba(242,242,240,.14); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #000; color: var(--white); font: 400 14px/1.5 Inter, sans-serif; }
+  .board { width: 1600px; height: 900px; background: var(--black); padding: 56px 64px; display: grid; grid-template-columns: 1fr 380px; gap: 56px; }
+  .label { font: 500 11px/1 "JetBrains Mono", monospace; letter-spacing: .14em; color: var(--gray-dark); text-transform: uppercase; }
+  .label b { color: var(--white); font-weight: 500; }
+  .hero { border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; position: relative; }
+  .hero.light { background: var(--white); border-color: var(--white); color: var(--black); }
+  .corner { position: absolute; font: 500 10px/1 "JetBrains Mono", monospace; letter-spacing: .1em; color: var(--gray-dark); }
+  .light .corner { color: var(--gray); }
+  .side { display: flex; flex-direction: column; gap: 18px; }
+  .side h2 { font: 700 34px/1.05 "Space Grotesk", sans-serif; letter-spacing: -.01em; }
+  .side p { color: #c9c9c6; }
+  .side p b { color: var(--white); font-weight: 600; }
+  .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
+  .tile { height: 150px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); }
+  .tile.light { background: var(--white); border-color: var(--white); }
+  .sizes { display: flex; align-items: end; gap: 22px; border: 1px solid var(--line); padding: 16px 18px; }
+  .sizes span { font: 500 10px/1 "JetBrains Mono", monospace; color: var(--gray-dark); display: block; margin-top: 8px; text-align: center; }
+  .app { background: var(--black); border-radius: 22%; display: flex; align-items: center; justify-content: center; border: 1px solid #222; }
+
+  /* Composição principal: símbolo + nome empilhado (Gerstner) */
+  .lockup { display: flex; align-items: center; gap: 48px; }
+  .stack { font: 700 64px/.9 "Space Grotesk", sans-serif; letter-spacing: -.03em; }
+  .stack i { font-style: normal; color: var(--white); }
+  .stack s { text-decoration: none; color: #4a4a4a; }
+  .stack u { text-decoration: none; color: var(--lime); }
+  .light .stack i { color: var(--black); } .light .stack s { color: #a9a9a4; } .light .stack u { color: var(--black); }
+  .h-lock { display: flex; align-items: center; gap: 18px; }
+  .h-lock .wm { font: 700 26px/1 "Space Grotesk", sans-serif; letter-spacing: -.01em; }
+  .h-lock .wm span { color: var(--lime); }
+  .light .h-lock .wm span { color: var(--black); }
+</style>
+</head>
+<body>
+
+<section class="board">
+  <div class="hero">
+    <span class="corner" style="top:18px;left:20px">CONCEITO A + B · COMPOSIÇÃO PRINCIPAL</span>
+    <span class="corner" style="bottom:18px;right:20px">GERSTNER × CAMADAS ISOMÉTRICAS</span>
+    <div class="lockup">
+      <img src="AB-simbolo-negativo.svg" style="height:300px" alt="">
+      <div class="stack">
+        <div><i>T</i><s>OTALLY</s></div>
+        <div><i>A</i><s>CCURATE</s></div>
+        <div><i>L</i><s>ABS</s><u>.</u></div>
+      </div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="label"><b>A + B</b> · Escada de iniciais</div>
+    <h2>A sigla é a escada.</h2>
+    <p>A coluna de iniciais de Gerstner virou a parede da frente dos blocos: <b>T</b> no bloco mais alto, <b>A</b> no do meio, <b>L</b> no da frente. Lida da esquerda para a direita, a escada desce soletrando a marca.</p>
+    <p>Os blocos continuam sendo as três camadas — <b>ENGINEERING</b>, <b>ADVANCED</b>, <b>ESSENTIAL</b> — e o sinal lime fica no bloco mais perto de quem usa. Ao lado, o nome empilhado repete a mesma coluna T·A·L.</p>
+    <div class="tiles">
+      <div class="tile light"><img src="AB-simbolo-positivo.svg" style="height:112px" alt=""></div>
+      <div class="tile"><img src="AB-simbolo-negativo.svg" style="height:112px" alt=""></div>
+    </div>
+    <div class="sizes">
+      <div><div class="app" style="width:96px;height:96px"><img src="AB-simbolo-negativo.svg" style="height:66px" alt=""></div><span>96</span></div>
+      <div><div class="app" style="width:64px;height:64px"><img src="AB-simbolo-negativo.svg" style="height:44px" alt=""></div><span>64</span></div>
+      <div><div class="app" style="width:32px;height:32px"><img src="B-camadas-negativo.svg" style="height:22px" alt=""></div><span>32</span></div>
+      <div><div class="app" style="width:16px;height:16px"><img src="B-camadas-negativo.svg" style="height:11px" alt=""></div><span>16</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="board">
+  <div class="hero light">
+    <span class="corner" style="top:18px;left:20px">CONCEITO A + B · VERSÕES</span>
+    <div style="display:grid;gap:90px;justify-items:center">
+      <div class="lockup">
+        <img src="AB-simbolo-positivo.svg" style="height:220px" alt="">
+        <div class="stack" style="font-size:47px">
+          <div><i>T</i><s>OTALLY</s></div>
+          <div><i>A</i><s>CCURATE</s></div>
+          <div><i>L</i><s>ABS</s><u>.</u></div>
+        </div>
+      </div>
+      <div class="h-lock">
+        <img src="AB-simbolo-positivo.svg" style="height:58px" alt="">
+        <div class="wm">T.A.L.</div>
+      </div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="label"><b>A + B</b> · Regras</div>
+    <h2>Um símbolo, três usos.</h2>
+    <p><b>Composição principal</b> — símbolo com o nome empilhado. Capas, site e apresentações.</p>
+    <p><b>Composição horizontal</b> — símbolo com T.A.L. em uma linha. Cabeçalhos, rodapés e documentos.</p>
+    <p><b>Símbolo sozinho</b> — ícone de app e avatar. Abaixo de 48 px as letras somem; nesse tamanho usa-se a versão só com os blocos.</p>
+    <p>Sobre fundo claro, o sinal e o ponto final ficam em preto: o lime não aparece sobre claro.</p>
+    <div class="tiles">
+      <div class="tile"><div class="h-lock"><img src="AB-simbolo-negativo.svg" style="height:40px" alt=""><div class="wm" style="font-size:18px">T<span>.</span>A<span>.</span>L<span>.</span></div></div></div>
+      <div class="tile light" style="color:var(--black)"><div class="h-lock"><img src="AB-simbolo-positivo.svg" style="height:40px" alt=""><div class="wm" style="font-size:18px">T.A.L.</div></div></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

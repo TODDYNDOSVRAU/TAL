@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Logo T.A.L. — conceitos</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=block" rel="stylesheet">
+<style>
+  :root { --black:#080808; --white:#F2F2F0; --gray:#6B6B6B; --gray-dark:#8C8C8C; --lime:#C7FF32; --line:rgba(242,242,240,.14); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #000; color: var(--white); font: 400 14px/1.5 Inter, sans-serif; }
+  .board { width: 1600px; height: 900px; background: var(--black); position: relative; padding: 56px 64px; display: grid; grid-template-columns: 1fr 380px; gap: 56px; }
+  .board + .board { margin-top: 0; }
+  .label { font: 500 11px/1 "JetBrains Mono", monospace; letter-spacing: .14em; color: var(--gray-dark); text-transform: uppercase; }
+  .label b { color: var(--white); font-weight: 500; }
+  .hero { border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; position: relative; }
+  .hero .corner { position: absolute; font: 500 10px/1 "JetBrains Mono", monospace; letter-spacing: .1em; color: var(--gray-dark); }
+  .side { display: flex; flex-direction: column; gap: 18px; }
+  .side h2 { font: 700 34px/1.05 "Space Grotesk", sans-serif; letter-spacing: -.01em; }
+  .side p { color: #c9c9c6; font-size: 14px; }
+  .side p b { color: var(--white); font-weight: 600; }
+  .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
+  .tile { height: 150px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); }
+  .tile.light { background: var(--white); border-color: var(--white); }
+  .sizes { display: flex; align-items: end; gap: 22px; border: 1px solid var(--line); padding: 16px 18px; }
+  .sizes span { font: 500 10px/1 "JetBrains Mono", monospace; color: var(--gray-dark); display: block; margin-top: 8px; text-align: center; }
+  .app { background: var(--black); border-radius: 22%; display: flex; align-items: center; justify-content: center; border: 1px solid #222; }
+
+  /* A · Grade Gerstner */
+  .stack { font: 700 112px/.86 "Space Grotesk", sans-serif; letter-spacing: -.035em; }
+  .stack div { white-space: nowrap; }
+  .stack i { font-style: normal; color: var(--white); }
+  .stack s { text-decoration: none; color: #3a3a3a; }
+  .stack u { text-decoration: none; color: var(--lime); }
+  .stack.light i { color: var(--black); } .stack.light s { color: #b9b9b4; } .stack.light u { color: var(--black); }
+  .colmark { font: 700 1em/.86 "Space Grotesk", sans-serif; letter-spacing: -.02em; }
+
+  /* B · Camadas */
+  .lock-b { display: flex; flex-direction: column; align-items: center; gap: 44px; }
+  .lock-b .wm { font: 500 30px/1 "Space Grotesk", sans-serif; letter-spacing: .32em; margin-right: -.32em; }
+
+  /* C · Matriz */
+  .lock-c { display: grid; grid-template-columns: auto auto; gap: 18px 34px; align-items: end; }
+  .lock-c .meta { font: 500 15px/1.45 "JetBrains Mono", monospace; letter-spacing: .06em; color: var(--white); }
+  .lock-c .meta em { font-style: normal; color: var(--gray-dark); }
+  .lock-c .tag { grid-column: 1 / -1; font: 500 13px/1 "JetBrains Mono", monospace; letter-spacing: .1em; color: var(--gray-dark); }
+  .lock-c .foot { grid-column: 1 / -1; display: flex; justify-content: space-between; font: 400 13px/1.3 Inter, sans-serif; color: var(--gray-dark); border-top: 1px solid var(--line); padding-top: 12px; }
+
+  /* D · Retícula */
+  .reticle { position: relative; width: 420px; height: 420px; }
+  .reticle .mk { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font: 700 92px/1 "Space Grotesk", sans-serif; letter-spacing: -.02em; }
+  .reticle .mk i { font-style: normal; color: var(--lime); }
+</style>
+</head>
+<body>
+
+<!-- A · GRADE GERSTNER -->
+<section class="board">
+  <div class="hero">
+    <span class="corner" style="top:18px;left:20px">CONCEITO A · GRADE TIPOGRÁFICA</span>
+    <span class="corner" style="bottom:18px;right:20px">REF. KARL GERSTNER — BECH ELECTRONIC CENTRE</span>
+    <div class="stack">
+      <div><i>T</i><s>OTALLY</s></div>
+      <div><i>A</i><s>CCURATE</s></div>
+      <div><i>L</i><s>ABS</s><u>.</u></div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="label"><b>A</b> · Grade tipográfica</div>
+    <h2>As iniciais já são a sigla.</h2>
+    <p>Empilhando o nome completo, a primeira coluna lê <b>T · A · L</b> de cima para baixo — como nos cruzamentos de palavras de Gerstner. O nome inteiro e a sigla vivem na mesma forma.</p>
+    <p>O único lime é o ponto final: o sinal de “concluído”. A versão curta mantém só a coluna de iniciais.</p>
+    <div class="tiles">
+      <div class="tile light"><div class="stack light" style="font-size:38px"><div><i>T</i><s>OTALLY</s></div><div><i>A</i><s>CCURATE</s></div><div><i>L</i><s>ABS</s><u>.</u></div></div></div>
+      <div class="tile"><div class="colmark" style="font-size:44px;text-align:center">T<br>A<br>L<span style="color:var(--lime)">.</span></div></div>
+    </div>
+    <div class="sizes">
+      <div><div class="app" style="width:64px;height:64px"><div class="colmark" style="font-size:17px;text-align:center">T<br>A<br>L<span style="color:var(--lime)">.</span></div></div><span>64</span></div>
+      <div><div class="app" style="width:32px;height:32px"><div class="colmark" style="font-size:8.5px;text-align:center">T<br>A<br>L<span style="color:var(--lime)">.</span></div></div><span>32</span></div>
+      <div><div class="app" style="width:16px;height:16px"><div class="colmark" style="font-size:4.5px;text-align:center">T<br>A<br>L</div></div><span>16</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- B · CAMADAS ISOMÉTRICAS -->
+<section class="board">
+  <div class="hero">
+    <span class="corner" style="top:18px;left:20px">CONCEITO B · CAMADAS</span>
+    <span class="corner" style="bottom:18px;right:20px">REF. INDUSTRY LAB</span>
+    <div class="lock-b">
+      <img src="B-camadas-negativo.svg" style="height:330px" alt="">
+      <div class="wm">TOTALLY ACCURATE LABS</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="label"><b>B</b> · Camadas isométricas</div>
+    <h2>Três blocos, três camadas.</h2>
+    <p>Os blocos são as três camadas dos produtos T.A.L.: <b>ENGINEERING</b> ao fundo, <b>ADVANCED</b> no meio, <b>ESSENTIAL</b> na frente — mais simples, mais perto de quem usa.</p>
+    <p>O sinal lime fica no bloco da frente: o que o usuário vê primeiro. Desenho só de linhas, com espessura única.</p>
+    <div class="tiles">
+      <div class="tile light"><img src="B-camadas-positivo.svg" style="height:110px" alt=""></div>
+      <div class="tile"><img src="B-camadas-negativo.svg" style="height:110px" alt=""></div>
+    </div>
+    <div class="sizes">
+      <div><div class="app" style="width:64px;height:64px"><img src="B-camadas-negativo.svg" style="height:40px" alt=""></div><span>64</span></div>
+      <div><div class="app" style="width:32px;height:32px"><img src="B-camadas-negativo.svg" style="height:21px" alt=""></div><span>32</span></div>
+      <div><div class="app" style="width:16px;height:16px"><img src="B-camadas-negativo.svg" style="height:11px" alt=""></div><span>16</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- C · MATRIZ DE PONTOS -->
+<section class="board">
+  <div class="hero">
+    <span class="corner" style="top:18px;left:20px">CONCEITO C · MATRIZ DE PONTOS</span>
+    <span class="corner" style="bottom:18px;right:20px">REF. NOBLE MACHINES</span>
+    <div class="lock-c">
+      <div class="tag">[TAL_SYS_01]</div>
+      <img src="C-matriz-negativo.svg" style="height:150px" alt="">
+      <div class="meta">TOTALLY<br>ACCURATE<br>LABS<br><em>V1.2</em></div>
+      <div class="foot"><span>Everything has a reason.</span><span>2026</span></div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="label"><b>C</b> · Matriz de pontos</div>
+    <h2>Feito do mesmo ponto.</h2>
+    <p>As letras são desenhadas com o <b>mesmo ponto</b> que separa a sigla — o ponto deixa de ser pontuação e vira o material da marca. A grade apagada ao fundo lembra um painel de instrumento.</p>
+    <p>Os três pontos finais são lime: três sinais acesos. Funciona como sistema — o rótulo técnico em mono vira assinatura de produto.</p>
+    <div class="tiles">
+      <div class="tile light"><img src="C-matriz-positivo.svg" style="height:46px" alt=""></div>
+      <div class="tile"><img src="C-matriz-limpo-negativo.svg" style="height:46px" alt=""></div>
+    </div>
+    <div class="sizes">
+      <div><div class="app" style="width:64px;height:64px"><img src="C-matriz-limpo-negativo.svg" style="width:50px" alt=""></div><span>64</span></div>
+      <div><div class="app" style="width:32px;height:32px"><img src="C-matriz-limpo-negativo.svg" style="width:26px" alt=""></div><span>32</span></div>
+      <div><div class="app" style="width:16px;height:16px"><img src="C-matriz-limpo-negativo.svg" style="width:13px" alt=""></div><span>16</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- D · RETÍCULA -->
+<section class="board">
+  <div class="hero">
+    <span class="corner" style="top:18px;left:20px">CONCEITO D · RETÍCULA</span>
+    <span class="corner" style="bottom:18px;right:20px">REF. OPENLAB</span>
+    <div class="reticle">
+      <svg viewBox="0 0 420 420" width="420" height="420" style="position:absolute;inset:0">
+        <g fill="none" stroke="#F2F2F0" stroke-width="5" stroke-linecap="square">
+          <path d="M10 70 V10 H70 M350 10 H410 V70 M410 350 V410 H350 M70 410 H10 V350"/>
+        </g>
+        <g stroke="#8C8C8C" stroke-width="2">
+          <!-- régua no topo e na base: traço a cada 14 px, longo a cada 70 -->
+          <path id="ticks" d="M84 10 v10 M98 10 v6 M112 10 v6 M126 10 v6 M140 10 v6 M154 10 v14 M168 10 v6 M182 10 v6 M196 10 v6 M210 10 v18 M224 10 v6 M238 10 v6 M252 10 v6 M266 10 v14 M280 10 v6 M294 10 v6 M308 10 v6 M322 10 v6 M336 10 v10"/>
+          <use href="#ticks" transform="rotate(180 210 210)"/>
+          <use href="#ticks" transform="rotate(90 210 210)"/>
+          <use href="#ticks" transform="rotate(270 210 210)"/>
+        </g>
+      </svg>
+      <div class="mk">T<i>.</i>A<i>.</i>L<i>.</i></div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="label"><b>D</b> · Retícula de medição</div>
+    <h2>A marca dentro da régua.</h2>
+    <p>Um emblema fechado, como o hexágono da Openlab — mas com a forma de uma <b>área de medição</b>: cantos de enquadramento e réguas em milímetros nos quatro lados, com o traço maior marcando o centro.</p>
+    <p>O monograma atual fica no centro, sem mudança. É a opção mais próxima do que já existe.</p>
+    <div class="tiles">
+      <div class="tile light"><div style="position:relative;width:110px;height:110px"><svg viewBox="0 0 420 420" width="110" height="110" style="position:absolute;inset:0"><path d="M10 70 V10 H70 M350 10 H410 V70 M410 350 V410 H350 M70 410 H10 V350" fill="none" stroke="#080808" stroke-width="10"/></svg><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 25px/1 'Space Grotesk';color:#080808">T.A.L.</div></div></div>
+      <div class="tile"><div style="position:relative;width:110px;height:110px"><svg viewBox="0 0 420 420" width="110" height="110" style="position:absolute;inset:0"><path d="M10 70 V10 H70 M350 10 H410 V70 M410 350 V410 H350 M70 410 H10 V350" fill="none" stroke="#F2F2F0" stroke-width="10"/></svg><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 25px/1 'Space Grotesk'">T<span style="color:var(--lime)">.</span>A<span style="color:var(--lime)">.</span>L<span style="color:var(--lime)">.</span></div></div></div>
+    </div>
+    <div class="sizes">
+      <div><div class="app" style="width:64px;height:64px;font:700 15px/1 'Space Grotesk'">T<span style="color:var(--lime)">.</span>A<span style="color:var(--lime)">.</span>L<span style="color:var(--lime)">.</span></div><span>64</span></div>
+      <div><div class="app" style="width:32px;height:32px;font:700 7.5px/1 'Space Grotesk'">T.A.L.</div><span>32</span></div>
+      <div><div class="app" style="width:16px;height:16px;font:700 4px/1 'Space Grotesk'">T.A.L.</div><span>16</span></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

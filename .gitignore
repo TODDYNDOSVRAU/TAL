@@ -1,0 +1,7 @@
+﻿# T.A.L. — only brand and documents. Everything else is ignored.
+/*
+!/.gitignore
+!/CLAUDE.md
+!/TAL/
+!/figma/
+!/replica-music/

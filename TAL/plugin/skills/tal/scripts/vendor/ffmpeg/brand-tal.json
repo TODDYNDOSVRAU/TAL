@@ -1,0 +1,26 @@
+{
+  "font": "Space Grotesk",
+  "font_file": "C:/dev/TAL/fonts/space_grotesk_500.ttf",
+  "colors": {
+    "primary": "7EE3EA",
+    "accent": "7EE3EA",
+    "text": "F2F2F0",
+    "outline": "080808",
+    "background": "080808"
+  },
+  "safe_margin": 48,
+  "styles": {
+    "caption": {
+      "font": "Inter",
+      "colour": "F2F2F0",
+      "box": false,
+      "position": "bottom"
+    }
+  },
+  "caption": {
+    "outline": 2,
+    "bold": true,
+    "animate": "none",
+    "karaoke": false
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "description": "T.A.L.: bootstrap CLAUDE.md, route tasks to the right reference, guard against retired brand colours.",
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/session-start.js\"" } ] }
+    ],
+    "UserPromptSubmit": [
+      { "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/route.js\"" } ] }
+    ],
+    "Stop": [
+      { "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/stop-check.js\"", "timeout": 15 } ] }
+    ]
+  }
+}

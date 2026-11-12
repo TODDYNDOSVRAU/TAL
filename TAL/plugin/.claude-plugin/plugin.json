@@ -1,0 +1,8 @@
+{
+  "name": "tal",
+  "version": "2.1.0",
+  "description": "T.A.L. standard for Claude Code: one skill that routes code, video, motion, UI, reverse engineering, agents, tokens, self-review, memory and skill authoring through the Totally Accurate Labs principles. Creates the project CLAUDE.md on its own.",
+  "author": { "name": "Totally Accurate Labs" },
+  "license": "UNLICENSED",
+  "keywords": ["tal", "standards", "video", "motion", "reverse-engineering", "ui", "memory"]
+}

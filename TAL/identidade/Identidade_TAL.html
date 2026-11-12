@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Identidade T.A.L.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=block" rel="stylesheet">
+<style>
+  /* Paleta oficial T.A.L. — nenhuma outra cor é usada neste documento.
+     Tons intermediários existem apenas como opacidade das cores base. */
+  :root {
+    --black: #080808;          /* Absolute Black */
+    --white: #F2F2F0;          /* Precision White */
+    --gray: #6B6B6B;           /* Technical Gray (sobre claro) */
+    --gray-dark: #8C8C8C;      /* Technical Gray (sobre escuro) */
+    --ice: #7EE3EA;            /* Ice — destaque sobre escuro (o azul do T.A.R.K.A.S.) */
+    --teal: #0D6C74;           /* Deep Teal — o mesmo destaque sobre claro */
+    --line: rgba(8, 8, 8, .14);
+    --line-dark: rgba(242, 242, 240, .16);
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--white); color: var(--black); }
+  body { font: 400 10pt/1.55 Inter, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .page { width: 210mm; height: 297mm; padding: 22mm 20mm 18mm; position: relative; overflow: hidden; page-break-after: always; display: flex; flex-direction: column; }
+  .page:last-child { page-break-after: auto; }
+  .page.dark { background: var(--black); color: var(--white); }
+
+  .foot { position: absolute; left: 20mm; right: 20mm; bottom: 11mm; display: flex; justify-content: space-between;
+          font: 500 7pt/1 "JetBrains Mono", monospace; letter-spacing: .08em; color: var(--gray); border-top: .5pt solid var(--line); padding-top: 3mm; }
+  .dark .foot { color: var(--gray-dark); border-color: var(--line-dark); }
+
+  h1, h2, h3, .display { font-family: "Space Grotesk", sans-serif; font-weight: 700; letter-spacing: -.01em; }
+  h2 { font-size: 17pt; line-height: 1.2; margin: 0 0 4mm; display: flex; gap: 3mm; align-items: baseline; }
+  h2 .n { font: 500 8pt/1 "JetBrains Mono", monospace; letter-spacing: .04em; color: var(--white); background: var(--black); padding: 1.3mm 1.6mm 1.1mm; align-self: center; }
+  h2 { text-wrap: balance; }
+  h3 { font-size: 11pt; margin: 6mm 0 2mm; }
+  section + section { margin-top: 8mm; }
+  p { margin: 0 0 3mm; max-width: 148mm; text-wrap: pretty; }
+  .mono { font-family: "JetBrains Mono", monospace; }
+  .caps { text-transform: uppercase; letter-spacing: .06em; }
+  .muted { color: var(--gray); }
+  .dark .muted { color: var(--gray-dark); }
+
+  table { width: 100%; border-collapse: collapse; margin: 3mm 0 4mm; break-inside: avoid; }
+  th { font: 500 7.5pt/1.2 "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; text-align: left;
+       color: var(--gray); padding: 0 3mm 2mm 0; border-bottom: 1pt solid var(--black); }
+  td { padding: 2.1mm 3mm 2.1mm 0; border-bottom: .5pt solid var(--line); vertical-align: top; }
+  td:first-child { font-weight: 600; white-space: nowrap; }
+  td.sig { font-family: "Space Grotesk", sans-serif; font-weight: 700; white-space: nowrap; }
+
+  blockquote { border-left: 2pt solid var(--black); padding: 1mm 0 1mm 5mm; margin: 4mm 0; }
+  blockquote .en { font: 700 13pt/1.3 "Space Grotesk", sans-serif; }
+  .callout { border: .5pt solid var(--line); padding: 4mm 5mm; margin-top: 4mm; }
+
+  .head { position: absolute; left: 20mm; right: 20mm; top: 10mm; display: flex; justify-content: space-between;
+          font: 500 7pt/1 "JetBrains Mono", monospace; letter-spacing: .08em; color: var(--gray); text-transform: uppercase; }
+  .head b { color: var(--black); font-weight: 500; }
+  .ruler { height: 3mm; margin-bottom: 4mm; background:
+           repeating-linear-gradient(90deg, var(--gray-dark) 0 .4pt, transparent .4pt 5mm) bottom / 100% 3mm no-repeat,
+           repeating-linear-gradient(90deg, rgba(242,242,240,.25) 0 .4pt, transparent .4pt 1mm) bottom / 100% 1.4mm no-repeat; }
+  .clear .x { position: absolute; font: 500 6.5pt/1 "JetBrains Mono", monospace; color: var(--gray); }
+  .clear .x.t { top: 1.8mm; left: 50%; } .clear .x.b { bottom: 1.8mm; left: 50%; }
+  .clear .x.l { left: 2mm; top: 50%; transform: translateY(-50%); } .clear .x.r { right: 2mm; top: 50%; transform: translateY(-50%); }
+
+  /* Capa */
+  .cover { justify-content: space-between; padding: 26mm 22mm 24mm; }
+  .mark { font: 700 64pt/1 "Space Grotesk", sans-serif; letter-spacing: -.02em; }
+  .mark i { font-style: normal; color: var(--ice); }
+  .cover .tag { font: 500 8.5pt/1 "JetBrains Mono", monospace; letter-spacing: .18em; color: var(--gray-dark); margin-top: 5mm; }
+  .cover .big { font: 700 34pt/1.05 "Space Grotesk", sans-serif; letter-spacing: -.015em; }
+  .cover .sub { font: 500 13pt/1.3 "Space Grotesk", sans-serif; color: var(--gray-dark); margin-top: 4mm; }
+  .cover .meta { display: flex; justify-content: space-between; align-items: end; font: 400 8pt/1.5 "JetBrains Mono", monospace; color: var(--gray-dark); border-top: .5pt solid var(--line-dark); padding-top: 4mm; }
+  .cover .meta b { color: var(--white); font-weight: 500; }
+  .dot { display: inline-block; width: 2.2mm; height: 2.2mm; background: var(--ice); margin-right: 2mm; vertical-align: .2mm; }
+
+  /* Paleta */
+  .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin: 3mm 0 4mm; }
+  .sw { border: .5pt solid var(--line); }
+  .sw .chip { height: 11mm; }
+  .sw .info { padding: 2.5mm 3mm; font-size: 8pt; line-height: 1.4; }
+  .sw .info b { display: block; font: 700 9pt/1.3 "Space Grotesk", sans-serif; }
+  .sw .info .mono { font-size: 7.5pt; color: var(--gray); }
+  .typo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; margin-top: 3mm; }
+  .typo > div { border: .5pt solid var(--line); padding: 3mm; }
+  .typo .s { font-size: 20pt; line-height: 1.1; margin-bottom: 2mm; }
+  .typo small { display: block; font-size: 7.5pt; color: var(--gray); }
+
+  /* Manifesto */
+  .manifesto { justify-content: center; text-align: center; padding: 24mm 26mm 22mm; }
+  .manifesto .eyebrow { font: 500 8pt/1 "JetBrains Mono", monospace; letter-spacing: .18em; color: var(--gray-dark); }
+  .manifesto .t1 { font: 700 30pt/1.05 "Space Grotesk", sans-serif; margin: 8mm 0 3mm; }
+  .manifesto .t2 { font: 500 13pt/1.2 "Space Grotesk", sans-serif; color: var(--ice); }
+  .manifesto .t3 { font: 700 15pt/1.25 "Space Grotesk", sans-serif; margin: 11mm 0 8mm; }
+  .manifesto .body p { max-width: none; margin: 0 auto 3mm; font-size: 10.5pt; line-height: 1.6; }
+  .manifesto .close { margin-top: 11mm; font: 700 11pt/1.6 "Space Grotesk", sans-serif; letter-spacing: .04em; }
+  .manifesto .close > span { display: block; color: var(--gray-dark); font: 500 8pt/1.6 "JetBrains Mono", monospace; letter-spacing: .16em; margin-top: 2mm; }
+
+  .closing { justify-content: space-between; }
+  .closing .center { text-align: center; }
+  .closing .center .a { font: 700 26pt/1.1 "Space Grotesk", sans-serif; }
+  .closing .center .b { font: 500 12pt/1.3 "Space Grotesk", sans-serif; color: var(--ice); margin-top: 3mm; }
+  .closing .center .c { font: 500 8pt/1 "JetBrains Mono", monospace; letter-spacing: .18em; color: var(--gray-dark); margin-top: 9mm; }
+  .closing .center .d { font: 400 10.5pt/1.5 Inter, sans-serif; margin-top: 3mm; }
+
+  /* Logotipo */
+  .logos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; margin: 3mm 0 2mm; }
+  .logo-box { height: 30mm; display: flex; align-items: center; justify-content: center; border: .5pt solid var(--line); }
+  .logo-box .mark { font-size: 26pt; }
+  .logo-box.neg { background: var(--black); color: var(--white); border-color: var(--black); }
+  .logo-box.pos { background: var(--white); color: var(--black); }
+  .logo-box.pos .mark i { color: var(--black); }
+  .logo-box.mono-v { background: var(--white); color: var(--gray); }
+  .logo-box.mono-v .mark i { color: var(--gray); }
+  .logo-cap { font-size: 8pt; line-height: 1.4; margin-top: 1.5mm; }
+  .logo-cap b { font-family: "Space Grotesk", sans-serif; }
+  .clear { display: inline-block; padding: 6mm; border: .75pt dashed var(--gray); position: relative; }
+  .clear .mark { font-size: 22pt; color: var(--black); }
+  .clear .mark i { color: var(--black); }
+  .spec { display: grid; grid-template-columns: 62mm 1fr; gap: 6mm; align-items: center; margin: 3mm 0; }
+  ul.list { list-style: none; margin: 1mm 0 3mm; }
+  ul.list li { padding-left: 5mm; position: relative; margin-bottom: 1.2mm; max-width: 148mm; }
+  ul.list li::before { content: "—"; position: absolute; left: 0; color: var(--gray); }
+
+  /* Arquitetura */
+  .lockup { background: var(--black); color: var(--white); padding: 7mm 8mm; display: inline-block; margin: 2mm 0 3mm; }
+  .lockup .p { font: 700 22pt/1 "Space Grotesk", sans-serif; letter-spacing: -.01em; }
+  .lockup .e { font: 500 7.5pt/1 "JetBrains Mono", monospace; letter-spacing: .16em; color: var(--gray-dark); margin-top: 3mm; }
+  .lockup .e .dot { width: 1.6mm; height: 1.6mm; }
+
+  /* Composição do logo: símbolo de blocos + nome empilhado */
+  .lock { display: flex; align-items: center; }
+  .lock img { display: block; }
+  .stk { font: 700 1em/.9 "Space Grotesk", sans-serif; letter-spacing: -.03em; white-space: nowrap; }
+  .stk i { font-style: normal; }
+  .stk s { text-decoration: none; color: rgba(242,242,240,.32); }
+  .stk u { text-decoration: none; color: inherit; }
+  .stk.on-light s { color: rgba(8,8,8,.32); }
+  .stk.on-light u { color: inherit; }
+  .stk.mono s { color: rgba(107,107,107,.45); }
+
+  td.no { color: var(--gray); }
+  td.no s { text-decoration-color: rgba(8,8,8,.35); }
+</style>
+</head>
+<body>
+<!-- 1 · CAPA -->
+<div class="page dark cover">
+  <div class="lock" style="gap:9mm">
+    <img src="../logo/AB-topo-negativo.svg" style="height:40mm" alt="">
+    <div class="stk" style="font-size:25pt"><div><i>T</i><s>OTALLY</s></div><div><i>A</i><s>CCURATE</s></div><div><i>L</i><s>ABS</s><u>.</u></div></div>
+  </div>
+  <div>
+    <div class="big">THINK LIKE T.A.L.</div>
+    <div class="sub">EVERYTHING HAS A REASON.</div>
+  </div>
+  <div><div class="ruler"></div><div class="meta">
+    <div><b>Identidade, filosofia e padrões da marca</b><br>Documento-base de identidade corporativa</div>
+    <div style="text-align:right"><span class="dot"></span><b>MADE BY T.A.L.</b><br>Versão 1.2 · outubro de 2026</div>
+  </div></div>
+</div>
+
+<!-- 2 · PONTO DE PARTIDA / POSICIONAMENTO -->
+<div class="page">
+  <div class="head"><span>01–02 · Fundamentos</span><span><b>T.A.L.</b> · Identidade v1.2</span></div>
+  <section>
+    <h2><span class="n">01</span>Ponto de partida</h2>
+    <p>A Totally Accurate Labs (T.A.L.) nasce com a proposta de ser precisa e completa em tudo o que faz — da aparência e da usabilidade dos produtos à arquitetura, ao código e aos resultados técnicos.</p>
+    <p>A empresa não deve ser reconhecida apenas pelo que diz ser, mas pelo padrão que aplica. Sua filosofia precisa aparecer em cada decisão: no que é construído, no que é priorizado, no que é corrigido e até no que é recusado.</p>
+    <p>A ideia central é simples: nada deve existir sem propósito, e nada importante deve ser feito pela metade.</p>
+  </section>
+  <section>
+    <h2><span class="n">02</span>Posicionamento e sistema de assinaturas</h2>
+    <p>Assinatura filosófica principal: <b>THINK LIKE T.A.L.</b></p>
+    <p>A expressão aproveita o sentido de “agir/pensar como tal” em português. Não é apenas um slogan em inglês: é um chamado para pensar, decidir e agir de acordo com o padrão que a T.A.L. representa.</p>
+    <table>
+      <tr><th style="width:38%">Frase</th><th style="width:22%">Papel</th><th>Função</th></tr>
+      <tr><td class="sig">THINK LIKE T.A.L.</td><td>Assinatura</td><td>A filosofia: adotar o padrão T.A.L. em cada decisão.</td></tr>
+      <tr><td class="sig">MADE BY T.A.L.</td><td>Selo</td><td>A autoria: identifica os produtos desenvolvidos pela empresa.</td></tr>
+      <tr><td class="sig">EVERYTHING HAS A REASON.</td><td>Frase de apoio</td><td>A crença que explica a assinatura. Acompanha THINK LIKE T.A.L.; não aparece sozinha.</td></tr>
+    </table>
+    <p>A marca tem uma assinatura e um selo — e só. Novas frases de efeito não são criadas para campanhas ou produtos: uma frase só entra no sistema se substituir outra, com motivo registrado.</p>
+  </section>
+  <section>
+    <h3 style="margin-top:0">Regra de comportamento</h3>
+    <blockquote>
+      <div class="en">“If it can be done right, there is no reason to do it halfway.”</div>
+      <div class="muted" style="margin-top:1.5mm">Se pode ser feito corretamente, não existe motivo para fazê-lo pela metade.</div>
+    </blockquote>
+    <p>Completude não significa colocar centenas de botões na tela. Significa oferecer todas as capacidades relevantes e organizá-las de maneira que o usuário consiga encontrá-las e entendê-las.</p>
+  </section>
+  <div class="foot"><span>T.A.L. — TOTALLY ACCURATE LABS</span><span>02</span></div>
+</div>
+
+<!-- 3 · THINK LIKE T.A.L. / PRINCÍPIOS -->
+<div class="page">
+  <div class="head"><span>03–04 · Filosofia</span><span><b>T.A.L.</b> · Identidade v1.2</span></div>
+  <section>
+    <h2><span class="n">03</span>O que significa THINK LIKE T.A.L.</h2>
+    <p>Pensar como T.A.L. é assumir responsabilidade pelo resultado, questionar decisões automáticas e não confundir aparência de qualidade com qualidade real. É buscar a solução mais correta para o problema — não necessariamente a mais fácil, a mais chamativa ou a mais curta.</p>
+    <p>Não significa afirmar que a empresa é infalível ou superior a todos. Significa trabalhar com rigor, reconhecer limitações, corrigir falhas e não aceitar erros evitáveis como parte normal do processo.</p>
+    <table>
+      <tr><th style="width:34%">Comportamento</th><th>Aplicação</th></tr>
+      <tr><td>Entender antes de executar</td><td>Identificar o problema real, os requisitos e as consequências.</td></tr>
+      <tr><td>Questionar cada escolha</td><td>Toda função, elemento visual e decisão técnica deve ter uma justificativa.</td></tr>
+      <tr><td>Não entregar pela metade</td><td>Concluir, testar e documentar o que foi prometido.</td></tr>
+      <tr><td>Não esconder limitações</td><td>Ser transparente sobre o que funciona, o que não funciona e por quê.</td></tr>
+      <tr><td>Buscar a solução correta</td><td>Comparar alternativas por qualidade, segurança, clareza e manutenção.</td></tr>
+      <tr><td>Aprender com falhas</td><td>Registrar, investigar, corrigir e evitar que o mesmo problema se repita.</td></tr>
+    </table>
+  </section>
+  <section>
+    <h2><span class="n">04</span>Os cinco princípios da T.A.L.</h2>
+    <table>
+      <tr><th style="width:34%">Princípio</th><th>Significado</th></tr>
+      <tr><td><span class="mono muted">01</span>&nbsp; PRECISION</td><td><b>Precisão.</b> Funcionalidades, cálculos, comportamentos e resultados devem ser consistentes, verificáveis e previsíveis.</td></tr>
+      <tr><td><span class="mono muted">02</span>&nbsp; COMPLETENESS</td><td><b>Completude.</b> Não omitir recursos relevantes nem entregar funcionalidades incompletas — e não adicionar opções sem propósito.</td></tr>
+      <tr><td><span class="mono muted">03</span>&nbsp; SIMPLICITY</td><td><b>Simplicidade.</b> A complexidade pode existir internamente; a experiência deve ser clara e fácil de compreender.</td></tr>
+      <tr><td><span class="mono muted">04</span>&nbsp; INTEGRITY</td><td><b>Integridade.</b> Não prometer o que não é entregue, não esconder limitações e não inventar capacidades.</td></tr>
+      <tr><td><span class="mono muted">05</span>&nbsp; EVOLUTION</td><td><b>Evolução.</b> Projetar para manutenção, compatibilidade, expansão e melhoria contínua.</td></tr>
+    </table>
+  </section>
+  <div class="foot"><span>T.A.L. — TOTALLY ACCURATE LABS</span><span>03</span></div>
+</div>
+
+<!-- 4 · REGRA + PALETA -->
+<div class="page">
+  <div class="head"><span>05 · Identidade visual</span><span><b>T.A.L.</b> · Identidade v1.2</span></div>
+  <section>
+    <h2><span class="n">05</span>Identidade visual</h2>
+    <p>A direção visual é industrial, tecnológica, minimalista e geométrica. A marca deve evitar clichês tecnológicos sem significado — como circuitos aleatórios, cérebros artificiais e símbolos genéricos. O logotipo deve ser reconhecível pela forma e pela tipografia, inclusive em tamanhos pequenos.</p>
+    <h3>Paleta de cores</h3>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#080808"></div><div class="info"><b>Absolute Black</b><span class="mono">#080808</span><br>Base visual, fundos e texto principal sobre claro.</div></div>
+      <div class="sw"><div class="chip" style="background:#F2F2F0"></div><div class="info"><b>Precision White</b><span class="mono">#F2F2F0</span><br>Superfícies claras e texto principal sobre escuro.</div></div>
+      <div class="sw"><div class="chip" style="background:linear-gradient(90deg,#6B6B6B 50%,#8C8C8C 50%)"></div><div class="info"><b>Technical Gray</b><span class="mono">#6B6B6B · #8C8C8C</span><br>Informação secundária: o primeiro sobre claro, o segundo sobre escuro.</div></div>
+      <div class="sw"><div class="chip" style="background:linear-gradient(90deg,#7EE3EA 50%,#0D6C74 50%)"></div><div class="info"><b>Ice · Deep Teal</b><span class="mono">#7EE3EA · #0D6C74</span><br>Destaque: o primeiro sobre escuro, o segundo sobre claro.</div></div>
+    </div>
+    <p><b>Destaque.</b> A marca usa o mesmo azul do T.A.R.K.A.S.: Ice sobre fundo escuro e Deep Teal sobre fundo claro, onde o Ice não tem contraste. O destaque marca o que está ativo ou pronto e os pontos de atenção — nunca é decoração. O logo não usa o destaque: ele é sempre de uma cor só.</p>
+    <table>
+      <tr><th style="width:38%">Combinação</th><th style="width:18%">Contraste</th><th>Regra</th></tr>
+      <tr><td>White sobre Black</td><td class="mono">17,9:1</td><td>Texto de qualquer tamanho.</td></tr>
+      <tr><td>Ice sobre Black</td><td class="mono">13,4:1</td><td>Destaques, indicadores e títulos curtos.</td></tr>
+      <tr><td>Deep Teal sobre White</td><td class="mono">5,5:1</td><td>Destaques sobre fundo claro (WCAG AA).</td></tr>
+      <tr><td>Gray #6B6B6B sobre White</td><td class="mono">4,8:1</td><td>Texto secundário (WCAG AA).</td></tr>
+      <tr><td>Gray #8C8C8C sobre Black</td><td class="mono">6,0:1</td><td>Texto secundário (WCAG AA).</td></tr>
+      <tr><td>Ice sobre White</td><td class="mono">1,3:1</td><td><b>Proibido.</b> Sobre fundo claro, o destaque é sempre Deep Teal.</td></tr>
+    </table>
+    <p class="muted">Distribuição: preto e branco dominam a identidade; o destaque ocupa no máximo cerca de 5% de qualquer composição. Tons intermediários (linhas, divisores, estados) são obtidos por opacidade das cores base — nunca por cores novas.</p>
+  </section>
+  <div class="foot"><span>T.A.L. — TOTALLY ACCURATE LABS</span><span>04</span></div>
+</div>
+
+<!-- 5 · TIPOGRAFIA + LOGOTIPO -->
+<div class="page">
+  <div class="head"><span>05 · Identidade visual</span><span><b>T.A.L.</b> · Identidade v1.2</span></div>
+  <section>
+    <h3 style="margin-top:0">Tipografia</h3>
+    <div class="typo">
+      <div><div class="s" style="font-family:'Space Grotesk';font-weight:700">Aa</div><b>Space Grotesk</b><small>Títulos, assinaturas e identidade.</small></div>
+      <div><div class="s" style="font-family:Inter;font-weight:500">Aa</div><b>Inter</b><small>Interfaces e textos corridos.</small></div>
+      <div><div class="s" style="font-family:'JetBrains Mono'">Aa</div><b>JetBrains Mono</b><small>Código, métricas e dados técnicos.</small></div>
+    </div>
+    <h3>Logotipo</h3>
+    <p><b>A sigla é a escada.</b> Três blocos isométricos, desenhados só com linhas de espessura única, formam o símbolo. No topo de cada bloco está uma inicial, desenhada no mesmo traço: <b>T</b> no mais alto, <b>A</b> no do meio, <b>L</b> no da frente — a escada desce soletrando a marca. Os blocos são as três camadas dos produtos (ENGINEERING, ADVANCED, ESSENTIAL). O símbolo é sempre de uma cor só. Ao lado, o nome empilhado repete a mesma coluna de iniciais.</p>
+    <div class="logos">
+      <div><div class="logo-box neg"><div class="lock" style="gap:3mm"><img src="../logo/AB-topo-negativo.svg" style="height:19mm" alt=""><div class="stk" style="font-size:9pt"><div><i>T</i><s>OTALLY</s></div><div><i>A</i><s>CCURATE</s></div><div><i>L</i><s>ABS</s><u>.</u></div></div></div></div><div class="logo-cap"><b>Negativa (principal).</b> Linhas e iniciais em Precision White sobre Absolute Black.</div></div>
+      <div><div class="logo-box pos"><div class="lock" style="gap:3mm"><img src="../logo/AB-topo-positivo.svg" style="height:19mm" alt=""><div class="stk on-light" style="font-size:9pt"><div><i>T</i><s>OTALLY</s></div><div><i>A</i><s>CCURATE</s></div><div><i>L</i><s>ABS</s><u>.</u></div></div></div></div><div class="logo-cap"><b>Positiva.</b> Tudo em Absolute Black sobre fundo claro.</div></div>
+      <div><div class="logo-box mono-v"><div class="lock" style="gap:3mm"><img src="../logo/AB-topo-mono.svg" style="height:19mm" alt=""><div class="stk on-light mono" style="font-size:9pt"><div><i>T</i><s>OTALLY</s></div><div><i>A</i><s>CCURATE</s></div><div><i>L</i><s>ABS</s><u>.</u></div></div></div></div><div class="logo-cap"><b>Monocromática.</b> Uma cor só, para gravação, relevo e impressão em uma cor.</div></div>
+    </div>
+    <div class="spec">
+      <div style="text-align:center"><div class="clear"><span class="x t">x</span><span class="x b">x</span><span class="x l">x</span><span class="x r">x</span><img src="../logo/AB-topo-positivo.svg" style="height:24mm;display:block" alt=""></div></div>
+      <div>
+        <p><b>Composições.</b> Principal: símbolo com o nome empilhado (capas, site, apresentações). Horizontal: símbolo com “T.A.L.” em uma linha (cabeçalhos e rodapés). Símbolo sozinho: ícone de app e avatar.</p>
+        <p><b>Área de proteção.</b> Nenhum elemento entra a menos de <b>x</b> ao redor do símbolo, sendo <b>x</b> a largura de um bloco.</p>
+        <p style="margin:0"><b>Tamanho mínimo.</b> Com as letras: 48 px de altura em tela, 12 mm impresso. Abaixo disso, usa-se a versão só com os blocos, até 16 px.</p>
+      </div>
+    </div>
+    <h3>Não fazer</h3>
+    <ul class="list">
+      <li>Distorcer, girar ou mudar o ângulo isométrico dos blocos.</li>
+      <li>Mudar a ordem ou a altura dos blocos, ou tirar as letras do topo.</li>
+      <li>Preencher os blocos, engrossar só algumas linhas ou aplicar sombra, brilho e gradiente.</li>
+      <li>Aplicar cor ao símbolo: ele é sempre de uma cor só, a do traço.</li>
+      <li>Colocar sobre fotografia ou fundo sem contraste suficiente.</li>
+    </ul>
+  </section>
+  <div class="foot"><span>T.A.L. — TOTALLY ACCURATE LABS</span><span>05</span></div>
+</div>
+
+<!-- 6 · PRODUTOS + ARQUITETURA -->
+<div class="page">
+  <div class="head"><span>06–07 · Produtos e marca</span><span><b>T.A.L.</b> · Identidade v1.2</span></div>
+  <section>
+    <h2><span class="n">06</span>Como os produtos devem funcionar</h2>
+    <p>A T.A.L. não desenvolve interfaces apenas para impressionar. Desenvolve interfaces para funcionar. A experiência pode ser organizada em três camadas, sem dividir o produto em versões artificialmente limitadas:</p>
+    <table>
+      <tr><th style="width:26%">Camada</th><th style="width:24%">Objetivo</th><th>Conteúdo</th></tr>
+      <tr><td><span class="mono muted">01</span>&nbsp; ESSENTIAL</td><td>Simplicidade</td><td>Ações principais, controles intuitivos, informações essenciais e fluxo direto.</td></tr>
+      <tr><td><span class="mono muted">02</span>&nbsp; ADVANCED</td><td>Controle</td><td>Configurações detalhadas, parâmetros adicionais, personalização e controles avançados.</td></tr>
+      <tr><td><span class="mono muted">03</span>&nbsp; ENGINEERING</td><td>Transparência técnica</td><td>Diagnósticos, logs, métricas, parâmetros internos e ferramentas especializadas.</td></tr>
+    </table>
+    <h3>Exemplo aplicado ao T.A.P.E.S.</h3>
+    <p>Um iniciante deve conseguir tirar uma fotografia sem estudar um manual. Um usuário avançado deve controlar exposição, foco, processamento e gravação. Um usuário técnico deve consultar informações sobre o pipeline de imagem, os codecs, o sensor e os parâmetros de captura. Todos usam o mesmo aplicativo; o que muda é o nível de controle apresentado.</p>
+  </section>
+  <section>
+    <h2><span class="n">07</span>Arquitetura de marca</h2>
+    <p>Modelo de marca endossada: cada produto tem nome próprio e é sempre assinado pela T.A.L.</p>
+    <h3>Regras de nome</h3>
+    <ul class="list">
+      <li>O nome por extenso começa com <b>Totally Accurate</b>.</li>
+      <li>A sigla forma uma palavra real, ligada à função do produto.</li>
+      <li>Todas as palavras do nome por extenso são escritas corretamente — sem grafias inventadas para encaixar uma letra.</li>
+      <li>A sigla é o nome de uso; o nome por extenso aparece em “Sobre o aplicativo”, na documentação e em materiais institucionais.</li>
+    </ul>
+</section>
+  <div class="foot"><span>T.A.L. — TOTALLY ACCURATE LABS</span><span>06</span></div>
+</div>
+
+<!-- 7 · ARQUITETURA (cont.) -->
+<div class="page">
+  <div class="head"><span>07 · Arquitetura de marca</span><span><b>T.A.L.</b> · Identidade v1.2</span></div>
+  <section>
+    <h3 style="margin-top:0">Produtos da família</h3>
+    <div style="display:grid;grid-template-columns:62mm 1fr;gap:6mm;align-items:start">
+      <div><div class="lockup"><div class="p">T.A.P.E.S.</div><div class="e"><span class="dot"></span>MADE BY T.A.L.</div></div>
+    <p class="muted" style="font-size:8.5pt">Composição de produto: sigla em Space Grotesk Bold; selo em JetBrains Mono, Technical Gray, abaixo da sigla.</p></div>
+      <table style="margin-top:2mm">
+      <tr><th style="width:26%">Produto</th><th>Nome por extenso</th></tr>
+      <tr><td class="sig">T.A.R.K.A.S.</td><td>Totally Accurate Real-Time Kind of Audio System.</td></tr>
+      <tr><td class="sig">T.A.P.E.S.</td><td>Totally Accurate Picture Engine Studio.</td></tr>
+    </table>
+    </div>
+    </section>
+  <section>
+    <h3>Escrita do nome</h3>
+    <table>
+      <tr><th style="width:30%">Situação</th><th>Regra</th></tr>
+      <tr><td>Em texto</td><td>Sempre com pontos: T.A.L., T.A.R.K.A.S., T.A.P.E.S.</td></tr>
+      <tr><td>Fim de frase</td><td>O ponto da sigla encerra a frase; não se repete o ponto. Ex.: “feito pela T.A.L.”</td></tr>
+      <tr><td>Domínios, perfis, arquivos</td><td>Minúsculas e sem pontos: tal, tarkas, tapes.</td></tr>
+      <tr><td>Pronúncia</td><td>Como palavra: “tal”, “tárkas”, “têips”. Nunca soletrada.</td></tr>
+      <tr><td>Gênero</td><td>Feminino para a empresa (“a T.A.L.”); masculino para os produtos (“o T.A.P.E.S.”).</td></tr>
+    </table>
+  </section>
+  <div class="foot"><span>T.A.L. — TOTALLY ACCURATE LABS</span><span>07</span></div>
+</div>
+
+<!-- 7 · VOZ E TOM -->
+<div class="page">
+  <div class="head"><span>08 · Voz e tom</span><span><b>T.A.L.</b> · Identidade v1.2</span></div>
+  <section>
+    <h2><span class="n">08</span>Voz e tom</h2>
+    <p>A T.A.L. escreve como fala um bom engenheiro explicando algo a quem respeita: com fatos, sem pressa e sem exagero. O princípio de Integridade vale para cada palavra.</p>
+    <table>
+      <tr><th style="width:24%">Atributo</th><th>Na prática</th></tr>
+      <tr><td>Preciso</td><td>Números, fatos e nomes exatos no lugar de adjetivos. “Rápido” não diz nada; o tempo medido diz.</td></tr>
+      <tr><td>Direto</td><td>Frases curtas. Primeiro o que aconteceu, depois o que fazer.</td></tr>
+      <tr><td>Honesto</td><td>Diz o que não funciona, o que ainda não existe e por quê.</td></tr>
+      <tr><td>Calmo</td><td>Sem pontos de exclamação, emojis em mensagens de sistema ou promessas de “revolução”.</td></tr>
+    </table>
+    <h3>Evite e prefira</h3>
+    <table>
+      <tr><th style="width:42%">Evite</th><th>Prefira</th></tr>
+      <tr><td class="no">“Ops! Algo deu errado.”</td><td>“Não foi possível salvar: o disco está cheio. Libere espaço e tente de novo.”</td></tr>
+      <tr><td class="no">“O melhor áudio do mundo!”</td><td>“Latência medida e exibida no painel de diagnóstico.”</td></tr>
+      <tr><td class="no">“Clique aqui”</td><td>“Exportar vídeo”</td></tr>
+      <tr><td class="no">“Novidade incrível chegando em breve!”</td><td>“Ainda não disponível nesta versão.”</td></tr>
+      <tr><td class="no">“Tem certeza?”</td><td>“Excluir 12 gravações? Esta ação não pode ser desfeita.”</td></tr>
+    </table>
+    <h3>Idioma</h3>
+    <ul class="list">
+      <li><b>Assinatura, selo e nomes de produto</b> ficam sempre em inglês e nunca são traduzidos.</li>
+      <li><b>Interfaces</b> seguem o idioma do sistema do usuário — no mínimo português e inglês.</li>
+      <li><b>Documentos</b> são escritos no idioma do público a que se destinam.</li>
+      <li><b>O manifesto</b> é oficial em inglês e tem tradução de referência em português.</li>
+    </ul>
+  </section>
+  <div class="foot"><span>T.A.L. — TOTALLY ACCURATE LABS</span><span>08</span></div>
+</div>
+
+<!-- 8 · IMAGEM, SOM E MOVIMENTO -->
+<div class="page">
+  <div class="head"><span>09 · Imagem, som e movimento</span><span><b>T.A.L.</b> · Identidade v1.2</span></div>
+  <section>
+    <h2><span class="n">09</span>Imagem, som e movimento</h2>
+    <p>A T.A.L. faz produtos de imagem e de som. Por isso a própria marca precisa ter critério nos dois — e no movimento que os conecta.</p>
+    <h3>Imagem</h3>
+    <ul class="list">
+      <li>Fotografias reais dos produtos e do uso, com luz natural ou de estúdio controlada.</li>
+      <li>Fundos neutros, preferencialmente Absolute Black ou Precision White.</li>
+      <li>Sem banco de imagens genérico, filtros exagerados ou cenas encenadas sem relação com o produto.</li>
+      <li>Capturas de tela sempre reais. Nunca simular recursos ou dados que o produto não tem.</li>
+    </ul>
+    <h3>Som</h3>
+    <ul class="list">
+      <li>Todo som de interface tem função: confirmar, alertar ou indicar início e fim de uma ação.</li>
+      <li>Sons curtos, discretos e coerentes entre os produtos.</li>
+      <li>Respeitar sempre o volume e o modo silencioso do sistema.</li>
+      <li>Som de abertura, se existir, é opcional e pode ser desativado.</li>
+      <li>Em produtos de áudio, sons da interface nunca se misturam ao sinal do usuário.</li>
+    </ul>
+    <h3>Movimento</h3>
+    <ul class="list">
+      <li>Animação comunica mudança de estado; não decora.</li>
+      <li>Transições curtas, entre 150 e 300 ms, com desaceleração no final.</li>
+      <li>Respeitar a preferência do sistema por movimento reduzido.</li>
+      <li>Animações de abertura são curtas e podem ser puladas.</li>
+    </ul>
+  </section>
+  <div class="foot"><span>T.A.L. — TOTALLY ACCURATE LABS</span><span>09</span></div>
+</div>
+
+<!-- 9 · ENGENHARIA + PRECISÃO MENSURÁVEL -->
+<div class="page">
+  <div class="head"><span>10 · Engenharia</span><span><b>T.A.L.</b> · Identidade v1.2</span></div>
+  <section>
+    <h2><span class="n">10</span>Padrão de engenharia T.A.L.</h2>
+    <table>
+      <tr><th style="width:30%">Área</th><th>Exigência</th></tr>
+      <tr><td>Arquitetura</td><td>Modular, documentada e expansível.</td></tr>
+      <tr><td>Código</td><td>Legível, consistente e revisado.</td></tr>
+      <tr><td>Testes</td><td>Testes unitários, de integração e de ponta a ponta.</td></tr>
+      <tr><td>Segurança</td><td>Proteção de dados considerada desde a arquitetura.</td></tr>
+      <tr><td>Desempenho</td><td>Monitoramento, medição e otimização.</td></tr>
+      <tr><td>Compatibilidade</td><td>Testes em dispositivos e ambientes reais.</td></tr>
+      <tr><td>Interface</td><td>Acessibilidade (WCAG AA no mínimo), consistência e clareza.</td></tr>
+      <tr><td>Documentação</td><td>Completa, útil e atualizada.</td></tr>
+      <tr><td>Erros</td><td>Tratamento, logs, diagnóstico e recuperação.</td></tr>
+      <tr><td>Atualizações</td><td>Compatibilidade e migrações seguras.</td></tr>
+    </table>
+    <div class="callout">
+      <h3 style="margin-top:0">Quando uma funcionalidade está concluída?</h3>
+      <p style="margin:0">Não basta funcionar uma vez. Ela precisa operar de maneira previsível, ter sido testada, lidar com situações inesperadas, comunicar falhas e não comprometer outras partes do produto.</p>
+    </div>
+  </section>
+  <section>
+    <h3>Precisão mensurável</h3>
+    <p>Uma marca de precisão precisa provar o que diz. Cada produto define, na sua especificação, metas numéricas para as medidas abaixo, mede a cada versão e publica o resultado.</p>
+    <table>
+      <tr><th style="width:26%">Produto</th><th>O que medir</th></tr>
+      <tr><td class="sig">T.A.R.K.A.S.</td><td>Latência de ponta a ponta; interrupções de áudio por hora; desvio da resposta em frequência.</td></tr>
+      <tr><td class="sig">T.A.P.E.S.</td><td>Atraso do obturador; quadros perdidos por minuto de gravação; precisão de cor.</td></tr>
+    </table>
+  </section>
+  <div class="foot"><span>T.A.L. — TOTALLY ACCURATE LABS</span><span>10</span></div>
+</div>
+
+<!-- 10 · ASSINATURA NOS PRODUTOS -->
+<div class="page">
+  <div class="head"><span>11–12 · Aplicação</span><span><b>T.A.L.</b> · Identidade v1.2</span></div>
+  <section>
+    <h2><span class="n">11</span>Assinatura nos produtos</h2>
+    <p>MADE BY T.A.L. é o selo de autoria; THINK LIKE T.A.L. é a filosofia da empresa. As duas frases não competem: cumprem papéis diferentes.</p>
+    <table>
+      <tr><th style="width:34%">Local</th><th>Aplicação</th></tr>
+      <tr><td>Tela de inicialização</td><td class="sig">MADE BY T.A.L.</td></tr>
+      <tr><td>Site / apresentação institucional</td><td class="sig">THINK LIKE T.A.L. + EVERYTHING HAS A REASON.</td></tr>
+      <tr><td>Sobre o aplicativo</td><td>Developed by Totally Accurate Labs.</td></tr>
+      <tr><td>Documentação</td><td>T.A.L. Engineering Standards.</td></tr>
+      <tr><td>Rodapé</td><td>© 2026 Totally Accurate Labs · MADE BY T.A.L.</td></tr>
+    </table>
+  </section>
+  <section>
+    <h2><span class="n">12</span>Diretrizes consolidadas</h2>
+    <p>A T.A.L. deve ser reconhecida pelo padrão que aplica, não por promessas de perfeição. Sua identidade precisa ser percebida na experiência dos produtos, na clareza das interfaces, na qualidade da engenharia e na honestidade com o usuário.</p>
+    <p>THINK LIKE T.A.L. não é uma frase decorativa. É um critério de decisão. Antes de adicionar, remover, publicar ou aprovar qualquer coisa, a equipe deve conseguir responder:</p>
+    <table>
+      <tr><td class="mono muted" style="width:10%">01</td><td>Qual é o motivo?</td></tr>
+      <tr><td class="mono muted">02</td><td>Qual problema resolve?</td></tr>
+      <tr><td class="mono muted">03</td><td>Como sabemos que foi feito corretamente?</td></tr>
+    </table>
+  </section>
+  <div class="foot"><span>T.A.L. — TOTALLY ACCURATE LABS</span><span>11</span></div>
+</div>
+
+<!-- 11 · MANIFESTO -->
+<div class="page dark manifesto">
+  <div class="eyebrow"><span class="mono">13</span> &nbsp;·&nbsp; MANIFESTO OFICIAL &nbsp;·&nbsp; T.A.L. — TOTALLY ACCURATE LABS</div>
+  <div class="t1">THINK LIKE T.A.L.</div>
+  <div class="t2">EVERYTHING HAS A REASON.</div>
+  <div class="t3">WE DON’T DO THINGS BY HALVES.<br>WE DO THEM ACCURATELY.</div>
+  <div class="body">
+    <p>We believe that technology should be complete, precise and accessible.</p>
+    <p>Complexity belongs behind the scenes. Simplicity belongs in the hands of the user.</p>
+    <p>We don’t remove possibilities to make things easier.<br>We make possibilities easier to understand.</p>
+    <p>We don’t settle for something that simply works.<br>We pursue something that works correctly.</p>
+    <p>Every detail matters. Every function has a purpose. Every result must be reliable.</p>
+  </div>
+  <div class="close"><span style="margin-top:0"><span class="dot"></span>MADE BY T.A.L.</span></div>
+  <div class="foot"><span>T.A.L. — TOTALLY ACCURATE LABS</span><span>12</span></div>
+</div>
+
+<!-- 12 · TRADUÇÃO -->
+<div class="page">
+  <div class="head"><span>13 · Manifesto</span><span><b>T.A.L.</b> · Identidade v1.2</span></div>
+  <section>
+    <h2><span class="n">13</span>Tradução de referência do manifesto</h2>
+    <p class="muted">O manifesto é oficial em inglês. Esta tradução serve de referência e não substitui o original.</p>
+    <blockquote style="margin-top:6mm">
+      <div class="en">PENSE COMO T.A.L.<br>TUDO TEM UM MOTIVO.</div>
+    </blockquote>
+    <p style="font:700 13pt/1.3 'Space Grotesk',sans-serif;margin:7mm 0 6mm">Nós não fazemos as coisas pela metade.<br>Fazemos com precisão.</p>
+    <p>Acreditamos que a tecnologia deve ser completa, precisa e acessível.</p>
+    <p>A complexidade pertence aos bastidores; a simplicidade, às mãos do usuário.</p>
+    <p>Não removemos possibilidades para facilitar: tornamos as possibilidades mais fáceis de entender.</p>
+    <p>Não nos contentamos com algo que simplesmente funciona: buscamos algo que funcione corretamente.</p>
+    <p>Cada detalhe importa. Cada função tem um propósito. Cada resultado deve ser confiável.</p>
+  </section>
+  <div class="foot"><span>T.A.L. — TOTALLY ACCURATE LABS</span><span>13</span></div>
+</div>
+
+<!-- 13 · ENCERRAMENTO -->
+<div class="page dark closing">
+  <div></div>
+  <div class="center">
+    <img src="../logo/AB-topo-negativo.svg" style="height:46mm;display:block;margin:0 auto" alt="">
+    <div class="a" style="margin-top:14mm">THINK LIKE T.A.L.</div>
+    <div class="b">EVERYTHING HAS A REASON.</div>
+    <div class="c">TOTALLY ACCURATE LABS</div>
+  </div>
+  <p class="muted" style="font-size:8pt;max-width:none;margin-bottom:8mm">Documento-base de identidade corporativa, versão 1.2 (outubro de 2026). Define THINK LIKE T.A.L. como assinatura, MADE BY T.A.L. como selo de autoria e EVERYTHING HAS A REASON. como frase de apoio. Pendente: nome empilhado convertido em contornos e metas numéricas de cada produto.</p>
+  <div class="foot"><span>© 2026 TOTALLY ACCURATE LABS · MADE BY T.A.L.</span><span>14</span></div>
+</div>
+
+</body>
+</html>

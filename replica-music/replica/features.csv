@@ -1,0 +1,37 @@
+feature,area,priority,original,clone,notes
+Five-tab navigation (home browse radio library search),navigation,must,yes,no,tab names and order from [P]; radio becomes a stub or is dropped
+Library: songs albums artists playlists,library,must,yes,no,local files via MediaStore
+Songs list with sort and A-Z strip,library,must,yes,no,sections come with the list query
+Accent-free case-free search,search,must,yes,no,Unicode-aware matcher
+Search results grouped by type,search,must,yes,no,local first; Audius and Jamendo as the open catalogue
+Album detail with disc headers,detail,must,yes,no,
+Artist detail,detail,should,yes,no,
+Playlist create edit reorder,detail,must,yes,no,
+Mini player that expands by drag,player,must,yes,no,all properties derive from the drag fraction
+Now Playing with cover scale by state,player,must,yes,no,paused 0.85 playing 1.0 scrubbing 0.95
+Animated background from the cover,player,could,yes,no,must stay inside the 5% accent budget; static fallback after 3 slow frames
+Scrubber with buffering state,player,must,yes,no,
+Queue view with drag reorder and swipe remove with undo,queue,must,yes,no,
+Reversible shuffle that keeps autoplay order,queue,should,yes,no,
+Saved queue dropped after 12 h,queue,could,yes,no,product decision
+Autoplay refill when under 3 items left,queue,could,yes,no,
+Gapless for consecutive tracks of one album,playback,must,yes,no,encoder delay and padding trimmed
+Crossfade off auto manual 1-12 s,playback,should,yes,no,auto needs local fade/silence detection; manual first
+Volume normalisation that only attenuates,playback,should,yes,no,target -14 LUFS
+Network error does not skip the queue,playback,must,yes,no,
+Audio focus duck pause resume,playback,must,yes,no,
+Sleep timer countdown or end of track,playback,should,yes,no,add a short fade-out
+Synced lyrics with word timing,lyrics,should,yes,no,LRCLIB as the open source
+Lyrics anticipation and instrumental dots,lyrics,could,yes,no,
+Play history after 5 s and skip counter,stats,should,yes,no,
+Downloads with states and space error,offline,could,yes,no,only for open-catalogue tracks
+Stream cache with size setting,offline,could,yes,no,
+Audio settings page,settings,must,yes,no,
+Diagnostics export (logs queue engine),settings,should,yes,no,ENGINEERING layer
+Reduce motion and reduce transparency,accessibility,must,yes,no,
+Apple Music catalogue and editorial,content,could,yes,skip,licensed content owned by Apple
+Radio stations,content,could,yes,skip,licensed content
+Subscription and account sign-in,account,could,yes,skip,Apple account system
+Lossless and Atmos from the catalogue,content,could,yes,skip,licensed codecs and catalogue
+Group listening,social,could,yes,skip,needs the network of users
+Server-side AutoMix data,playback,could,yes,skip,data the service owns

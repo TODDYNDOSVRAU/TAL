@@ -1,0 +1,11 @@
+{
+  "name": "tal",
+  "owner": { "name": "Totally Accurate Labs" },
+  "plugins": [
+    {
+      "name": "tal",
+      "source": "./",
+      "description": "T.A.L. standard: principles, routing and self-review for code, video, motion, UI, reverse engineering, agents, tokens and memory."
+    }
+  ]
+}
