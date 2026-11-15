@@ -4,7 +4,11 @@
 
 **Context: 200k.** Work inside a 200k-token window. Don't select the 1M variants (`[1m]`). Keep the window lean: read only the part of a file you need, send long output and briefs through files (not pasted text), and delegate wide reads to a subagent that returns only the conclusion. Around 150k used (75%), write a short checkpoint (done, pending, next step) and compact or continue in a fresh session instead of running to the limit.
 
-**Allowed models: Haiku, Sonnet, Opus. Never Fable.** This holds for the main session, every subagent `model` parameter, agent frontmatter, `CLAUDE_CODE_SUBAGENT_MODEL` and workflows. Where a skill or reference lists `fable` as an option, this file wins.
+**Models: Haiku, Sonnet, Opus. Fable only as a last resort** (Opus came back stuck and the task justifies the cost; say so before using it). This holds for the main session, every subagent `model` parameter, agent frontmatter, `CLAUDE_CODE_SUBAGENT_MODEL` and workflows. Where a skill or reference says otherwise, this file wins.
+
+**Dedicated agent per subject, with model and effort fixed in its file.** Use the agent that fits the task; if none does, create one for that subject in `~/.claude/agents/<name>.md` (`model:` and `effort:` set, least tools, one narrow job). Shipped: `tal-scout` (haiku, low), `tal-builder` (sonnet, medium), `tal-architect` (opus, high), `tal-reviewer` (sonnet, high, read-only diff review), `tal-log-triager` (haiku, low, log triage). The Agent tool has no effort parameter, so effort comes from the file.
+
+**Precedence: what the owner asks in the current session overrides this file and every skill.** The 200k limit is enforced in `~/.claude/settings.json` (`autoCompactWindow` 200000, `CLAUDE_CODE_DISABLE_1M_CONTEXT=1`).
 
 **Analyse the task before choosing the model.** Before the first tool call of any non-trivial task, answer in one line each:
 

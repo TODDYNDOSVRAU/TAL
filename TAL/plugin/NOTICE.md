@@ -12,8 +12,8 @@ The T.A.L. plugin bundles third-party files under `skills/tal/scripts/vendor/`. 
 
 ## Third-party skills installed outside the plugin (not bundled)
 
-- Leonxlnx/taste-skill 2.5.1 (MIT), `design-taste-frontend`, installed at user level on 2026-11-12.
-- Jakubantalik/transitions.dev (own licence, free for personal and commercial use, no redistribution of the library), `transitions-dev` and `transitions-polish`, installed at user level on 2026-11-12.
+- Leonxlnx/taste-skill 2.5.1 (MIT), `design-taste-frontend`, installed at user level on 2026-11-12, moved to `~/.claude/skills-off/` on 2026-11-15.
+- Jakubantalik/transitions.dev (own licence, free for personal and commercial use, no redistribution of the library), `transitions-dev` and `transitions-polish`, installed at user level on 2026-11-12, moved to `~/.claude/skills-off/` on 2026-11-15.
 - DavidHDev/react-bits (MIT + Commons Clause): referenced only; not installed.
 
 `skills/tal/references/web.md` says how they combine with the identity. Nothing from them is copied into this plugin.
@@ -23,7 +23,7 @@ The T.A.L. plugin bundles third-party files under `skills/tal/scripts/vendor/`. 
 Wording in `skills/tal/references/*.md` was rewritten in the T.A.L. style. Sources used for ideas and numbers:
 
 - **MIT / Apache-2.0, adapted:** obra/superpowers (testing, debugging, verification, subagent practice), anthropics/skills (skill-creator, frontend-design, mcp-builder, webapp-testing), kajisho5/ffmpeg-skill, Leonxlnx/taste-skill, morluto/rea (reverse engineering evidence rules), thedotmack/claude-mem (handoff and layered recall; Apache-2.0), DietrichGebert/ponytail 5.3.3 (MIT, Copyright (c) 2026 DietrichGebert; the option ladder and shortcut-comment rule in `code.md`, "The smallest complete change"; its hooks, task-board ledger, webhook and levels were not adopted).
-- **MIT, adapted (grill.md):** mattpocock/skills, `grilling` (rounds of numbered questions over a design tree, a recommended answer on each, facts looked up instead of asked). Wording rewritten. The original is also installed at user level as `grill-me` and `grilling` (2026-11-13).
+- **MIT, adapted (grill.md):** mattpocock/skills, `grilling` (rounds of numbered questions over a design tree, a recommended answer on each, facts looked up instead of asked). Wording rewritten. The original `grilling` was installed at user level on 2026-11-13 and moved to `~/.claude/skills-off/` on 2026-11-15; `grill-me` now points to `grill.md`.
 - **CC-BY-SA-4.0, paraphrased only, no text copied:** trailofbits/skills (differential-review, fp-check, dwarf-expert). Ideas credited to Trail of Bits.
 - **No licence found, facts only, no prose copied:** apple-design, mobile-design, native-app-designer, anthropics doc-coauthoring.
 

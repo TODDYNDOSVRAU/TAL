@@ -16,7 +16,7 @@ Do it yourself when it is a handful of tool calls or you already know the target
 1. **Every session stays within 200k tokens of context.** Configured by `autoCompactWindow: 200000` and `CLAUDE_CODE_DISABLE_1M_CONTEXT=1` in `~/.claude/settings.json`. Near the limit, hand the work to an agent or write a handoff (`memory.md`); don't push on.
 2. **Models: Haiku, Sonnet, Opus. Fable only as a last resort**, when Opus came back stuck and the owner's task justifies the cost; say so before using it.
 3. **Dedicated agent per subject.** When a task needs an agent, use the one that fits; if none fits, create one for that subject (`~/.claude/agents/<name>.md`) with `model` and `effort` set in the file. Never dispatch with the model omitted; if it is omitted anyway, `CLAUDE_CODE_SUBAGENT_MODEL=sonnet` in `~/.claude/settings.json` is the fallback (not `_FORCE`, which would override each agent's own model).
-4. Shipped: `tal-scout` (haiku, low: find, read, extract), `tal-builder` (sonnet, medium: bounded implementation), `tal-architect` (opus, high: design, hard debugging, review). Effort has no Agent-tool parameter; it comes from the frontmatter, so a new level needs a new file.
+4. Shipped: `tal-scout` (haiku, low: find, read, extract), `tal-builder` (sonnet, medium: bounded implementation), `tal-architect` (opus, high: design, hard debugging, review), `tal-reviewer` (sonnet, high, read-only: independent diff review against a spec), `tal-log-triager` (haiku, low: first real error in a long log). Effort has no Agent-tool parameter; it comes from the frontmatter, so a new level needs a new file.
 5. **What the owner asks in the current session overrides these defaults.**
 
 ## Which agent and model
@@ -27,7 +27,8 @@ Do it yourself when it is a handful of tool calls or you already know the target
 | Mechanical edits across many files, renames, formatting | `tal-builder` | Sonnet, medium (Haiku only when the plan holds the code to write) |
 | Normal feature work, tests, refactors | `tal-builder` | Sonnet, medium |
 | Design, architecture, hard debugging, security review, ambiguous requirements | `tal-architect` | Opus, high |
-| Independent review of a diff | `tal-architect` or `tal-builder`, given the diff, not your conclusion | Sonnet for a small diff, Opus when a miss is expensive |
+| Independent review of a diff | `tal-reviewer`, given the diff and spec, not your conclusion | Sonnet, high; `tal-architect` (Opus) when a miss is expensive |
+| Read a long build log, logcat or test output | `tal-log-triager` | Haiku, low; returns the first real error only |
 | Summarise or extract from a big document | `tal-scout` | Haiku, low |
 
 Rule: **the cost of a wrong answer sets the tier, not the size of the task.** Haiku for reading and mechanical work; Opus where a mistake is expensive to find later. Fable is never in this table: last resort only, announced first (see the owner's rule above).

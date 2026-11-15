@@ -20,6 +20,8 @@ description: T.A.L. (Totally Accurate Labs) working standard. Use for coding, de
 | Task | `references/` |
 | --- | --- |
 | Code, tests, debugging, security, performance | `code.md` |
+| Android: Gradle failures, device, logcat, Room migrations, DSP checks | `android.md` |
+| Several sessions in one checkout (T.A.R.K.A.S., T.A.C.T.S.) | `sessions.md` |
 | Video and audio editing | `video.md` |
 | Motion graphics rendered to video | `motion.md` |
 | Interface, gesture, layout, app motion | `ui.md` |

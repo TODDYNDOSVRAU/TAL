@@ -6,10 +6,12 @@ Owner's decision (2026-11-12): for websites, **taste-skill's rules lead and T.A.
 
 | Source | Owns | Where it lives |
 | --- | --- | --- |
-| taste-skill 2.5.1 (`design-taste-frontend`, MIT) | Process and structure of a company website: kind of business, page plan, one section per screen, equal edges, real photographs and real icons, copy rules, dealt moments, finish gate | `~/.claude/skills/design-taste-frontend/` (installed 2026-11-12, user level) |
-| transitions.dev (`transitions-dev`, `transitions-polish`) | UI motion snippets (CSS, `t-*` selectors, reduced-motion guard) and the motion-token scale used to tune existing motion | `~/.claude/skills/transitions-dev/`, `transitions-polish/` |
+| taste-skill 2.5.1 (`design-taste-frontend`, MIT) | Process and structure of a company website: kind of business, page plan, one section per screen, equal edges, real photographs and real icons, copy rules, dealt moments, finish gate | `~/.claude/skills-off/design-taste-frontend/` (installed 2026-11-12; disabled 2026-11-15) |
+| transitions.dev (`transitions-dev`, `transitions-polish`) | UI motion snippets (CSS, `t-*` selectors, reduced-motion guard) and the motion-token scale used to tune existing motion | `~/.claude/skills-off/transitions-dev/`, `transitions-polish/` (disabled 2026-11-15) |
 | React Bits | Animated React components, copied into a project when needed | Not installed. Taken per project from reactbits.dev |
 | T.A.L. identity and principles | Colour, type, logo, accent budget, voice, fixed phrases, accessibility floor, the three interface layers | `C:\dev\CLAUDE.md`, `brand.md`, `voice.md` |
+
+**Disabled by default (owner, 2026-11-15).** The three skills were moved to `~/.claude/skills-off/` so their descriptions don't load in every project and transitions-dev doesn't trigger on Compose work. For website work, move them back to `~/.claude/skills/` for that period, or copy them into the site project's own `.claude/skills/`. Until then, follow the rules in this file without invoking them.
 
 ## Who wins on what
 
