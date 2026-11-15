@@ -33,7 +33,7 @@ Code, video, motion graphics, UI, reverse engineering, agents, token cost, memor
 
 ## Identity (new work only)
 
-Black `#080808`, White `#F2F2F0`, Gray `#6B6B6B` (light) / `#8C8C8C` (dark), accent Ice `#7EE3EA` on dark and Deep Teal `#0D6C74` on light, about 5% of a composition. Space Grotesk (titles), Inter (interface), JetBrains Mono (code, metrics). The logo is one colour, never the accent. Motion 150-300 ms, decelerating, honours reduced motion. WCAG AA minimum. Voice: precise, direct, honest, calm; no exclamation marks or emoji in system messages; errors say what happened and what to do.
+Black `#080808`, White `#F2F2F0`, Gray `#6B6B6B` (light) / `#8C8C8C` (dark), accent Ice `#7EE3EA` on dark and Deep Teal `#0D6C74` on light, about 5% of a composition. Space Grotesk (titles), Inter (interface), JetBrains Mono (code, metrics). The logo is one colour, never the accent. Motion 150-300 ms, decelerating; motion on screen is the top priority (no reduced-motion rule since 2026-11-12). WCAG AA minimum. Voice: precise, direct, honest, calm; no exclamation marks or emoji in system messages; errors say what happened and what to do.
 
 **Existing projects:** don't migrate colours, fonts or logo without asking. Each product keeps its own accent.
 

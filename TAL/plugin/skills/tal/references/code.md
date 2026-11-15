@@ -81,7 +81,7 @@ Always time out with a message that names what was awaited. A fixed delay is rig
 | Security | Data protection from the architecture | No secret in code; input validated at the boundary; least privilege; permission asked at the moment of use |
 | Performance | Monitored, measured, optimised | A number before and after. Never "feels faster" |
 | Compatibility | Real devices and environments | Ran on the target; if not, mark **pending** |
-| Interface | WCAG AA minimum, consistent, clear | Contrast, touch target, text scaling, reduced motion |
+| Interface | WCAG AA minimum, consistent, clear | Contrast, touch target, text scaling |
 | Documentation | Complete, useful, current | Changed behaviour means changed docs in the same commit |
 | Errors | Handled, logged, diagnosable, recoverable | Failure is caught, said in plain words, logged in the ENGINEERING layer |
 | Updates | Compatible, safe migrations | Old data opens in the new version; migration tested |

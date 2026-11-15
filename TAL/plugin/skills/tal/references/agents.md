@@ -11,22 +11,30 @@ A subagent costs a full context of its own. Use one only if at least one is true
 
 Do it yourself when it is a handful of tool calls or you already know the target file. Never delegate a check you can run inline. Never run the same work twice (yours and an agent's).
 
+## Owner's standing rule (overrides every other rule in this file)
+
+1. **Every session stays within 200k tokens of context.** Configured by `autoCompactWindow: 200000` and `CLAUDE_CODE_DISABLE_1M_CONTEXT=1` in `~/.claude/settings.json`. Near the limit, hand the work to an agent or write a handoff (`memory.md`); don't push on.
+2. **Models: Haiku, Sonnet, Opus. Fable only as a last resort**, when Opus came back stuck and the owner's task justifies the cost; say so before using it.
+3. **Dedicated agent per subject.** When a task needs an agent, use the one that fits; if none fits, create one for that subject (`~/.claude/agents/<name>.md`) with `model` and `effort` set in the file. Never dispatch with the model omitted; if it is omitted anyway, `CLAUDE_CODE_SUBAGENT_MODEL=sonnet` in `~/.claude/settings.json` is the fallback (not `_FORCE`, which would override each agent's own model).
+4. Shipped: `tal-scout` (haiku, low: find, read, extract), `tal-builder` (sonnet, medium: bounded implementation), `tal-architect` (opus, high: design, hard debugging, review). Effort has no Agent-tool parameter; it comes from the frontmatter, so a new level needs a new file.
+5. **What the owner asks in the current session overrides these defaults.**
+
 ## Which agent and model
 
 | Task | Agent | Model tier |
 | --- | --- | --- |
-| Find where something is, wide fan-out | `Explore` | Inherits the main model by default. For a cheap searcher define your own read-only agent with `model: haiku` |
-| Mechanical edits across many files, renames, formatting | general-purpose | Cheap |
-| Normal feature work, tests, refactors | main session or general-purpose | Mid (sonnet class) |
-| Design, architecture, hard debugging, security review, ambiguous requirements | main session or `Plan` | Strongest (opus class) |
-| Independent review of a diff | fresh agent given the diff, not your conclusion | Mid or strong |
-| Summarise or extract from a big document | general-purpose | Cheap |
+| Find where something is, wide fan-out | `tal-scout` | Haiku, low. `Explore` inherits the main model, so prefer `tal-scout` |
+| Mechanical edits across many files, renames, formatting | `tal-builder` | Sonnet, medium (Haiku only when the plan holds the code to write) |
+| Normal feature work, tests, refactors | `tal-builder` | Sonnet, medium |
+| Design, architecture, hard debugging, security review, ambiguous requirements | `tal-architect` | Opus, high |
+| Independent review of a diff | `tal-architect` or `tal-builder`, given the diff, not your conclusion | Sonnet for a small diff, Opus when a miss is expensive |
+| Summarise or extract from a big document | `tal-scout` | Haiku, low |
 
-Rule: **the cost of a wrong answer sets the tier, not the size of the task.** Cheap models for reading and mechanical work; strong ones where a mistake is expensive to find later.
+Rule: **the cost of a wrong answer sets the tier, not the size of the task.** Haiku for reading and mechanical work; Opus where a mistake is expensive to find later. Fable is never in this table: last resort only, announced first (see the owner's rule above).
 
-Model precedence for a subagent (Claude Code docs, recent versions): the `model` parameter of that invocation, then the agent's frontmatter `model`, then `CLAUDE_CODE_SUBAGENT_MODEL`, then the main model. Older versions put the variable first, so check your version. `CLAUDE_CODE_SUBAGENT_MODEL_FORCE=1` forces one model and ignores frontmatter. Accepted values: `sonnet`, `opus`, `haiku`, `fable`, a full model ID, `inherit`. `Explore` and `Plan` start without CLAUDE.md and git status.
+Model precedence for a subagent (Claude Code docs, recent versions): the `model` parameter of that invocation, then the agent's frontmatter `model`, then `CLAUDE_CODE_SUBAGENT_MODEL`, then the main model. Older versions put the variable first, so check your version. `CLAUDE_CODE_SUBAGENT_MODEL_FORCE=1` forces one model and ignores frontmatter. Accepted values: `sonnet`, `opus`, `haiku`, `fable` (last resort only), a full model ID, `inherit` (avoid: it inherits the session's model). `Explore` and `Plan` start without CLAUDE.md and git status.
 
-**Always set `model` explicitly when dispatching.** An omitted model inherits the session's model, often the strongest and dearest, which silently defeats the table above. Escalation: a task that came back stuck goes to a model at least one tier above the one that got stuck.
+**Always set `model` explicitly when dispatching.** An omitted model inherits the session's model, often the strongest and dearest, which silently defeats the table above. Escalation: a task that came back stuck goes to a model at least one tier above the one that got stuck (Haiku to Sonnet, Sonnet to Opus). Only an Opus that came back stuck, on a task worth the cost, may go to Fable, and you say so first.
 
 Superpowers' observation (its own, not measured here): *turn count beats token price*. Cost and context grow with the number of turns, and the cheapest models reportedly take 2-3x the turns on multi-step prose-described work, so use a mid tier as the floor for reviewers and for implementers working from prose. The cheapest tier fits when the plan already contains the code to write (transcription plus tests) and for single-file mechanical fixes. Size signals: 1-2 files with a full spec means cheap; several files with integration concerns means standard; design judgment or broad codebase understanding means strongest.
 

@@ -1,6 +1,6 @@
 ---
 name: tal-apple-design
-description: Apple-style fluid, physical interface design (springs, momentum, interruptible gestures, materials, reduced motion, typography craft) applied inside the T.A.L. identity (palette, typefaces, accent, logo, voice) for T.A.R.K.A.S. and other T.A.L. products. Use for any UI, motion, gesture, feedback or layout work in C:\dev, Android/Compose first.
+description: Apple-style fluid, physical interface design (springs, momentum, interruptible gestures, materials, typography craft) applied inside the T.A.L. identity (palette, typefaces, accent, logo, voice) for T.A.R.K.A.S. and other T.A.L. products. Use for any UI, motion, gesture, feedback or layout work in C:\dev, Android/Compose first.
 ---
 
 # T.A.L. × Apple design
@@ -42,7 +42,7 @@ Use with `C:\dev\CLAUDE.md`, which holds the identity rules. This skill covers h
 11. **Frame smoothness.** Animate only transform and alpha. Keep positional change per frame below perceptible strobing.
 12. **Materials.** Translucent chrome (tab bar, mini player) floats over content. Heavier material for structure, lighter for interactive controls. Never stack light translucent surfaces. Tint with the identity base. Animate blur and scale together on enter and exit.
 13. **Feedback, three senses.** Causality (the feedback matches the event that caused it), harmony (visual, sound and haptic fire on the same frame), utility (only at meaningful moments).
-14. **Reduced motion.** Respect three signals: reduced motion (cross-fade, no overshoot), reduced transparency (solid surfaces, no blur), more contrast (defined borders). Keep opacity and colour changes that aid comprehension.
+14. **Accessibility signals.** Respect two signals: reduced transparency (solid surfaces, no blur) and more contrast (defined borders). There is no reduced-motion path: the owner removed that rule on 2026-11-12 and motion on screen is the top priority (`C:\dev\CLAUDE.md`).
 15. **Typography craft.** Tracking is size-specific: tighten large headings (≈ −0.02 em), keep body near 0. Leading shrinks as size grows. Hierarchy comes from weight + size + leading together. Layout scales with the system font size (sp, not fixed dp for text).
 16. **Eight principles.** Purpose, agency, responsibility, familiarity, flexibility, simplicity (not minimalism), craft, delight. Each screen answers: where am I, where can I go, what is here, how do I leave.
 
@@ -57,7 +57,6 @@ The app is Android, so the web examples in Apple's guide translate like this:
 | Spring with bounce (damping 0.8) | `spring(dampingRatio = 0.8f, ...)` only after a flick |
 | Velocity handoff | `Animatable.animateTo(target, initialVelocity = releaseVelocity)` |
 | `backdrop-filter` material | the existing Haze setup (`hazeEffect`), tinted with `TalInk…` or `TarkasIce` tokens, not custom colours |
-| `prefers-reduced-motion` | the existing `rememberReducedMotion()` helper |
 | `prefers-reduced-transparency` | the existing reduce-transparency setting |
 
 Stiffness is derived from the response: `stiffness = (2π / response)²`.
@@ -71,7 +70,7 @@ Stiffness is derived from the response: `stiffness = (2π / response)²`.
 - [ ] Colours are identity tokens only. Accent is Ice on dark, Deep Teal on light. No lime, no blue on light.
 - [ ] Logo is a single colour and is not animated with an accent.
 - [ ] Type uses Space Grotesk, Inter or JetBrains Mono, with size-specific tracking.
-- [ ] Reduced-motion and reduced-transparency paths exist and were tested.
+- [ ] Reduced-transparency and increased-contrast paths exist and were tested.
 - [ ] Copy follows the voice rules. Errors say what to do.
 - [ ] Verified on device or emulator. If not, mark as pending.
 

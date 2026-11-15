@@ -10,11 +10,20 @@ The T.A.L. plugin bundles third-party files under `skills/tal/scripts/vendor/`. 
 | `vendor/lint/` | Leonxlnx/taste-skill 2.1.5, `scripts/lint.mjs` | MIT (`vendor/lint/LICENSE`) | Copyright (c) 2026 Leonxlnx | Rules changed to the T.A.L. identity; marked "Modified for T.A.L." in the file header. |
 | `vendor/debug/` | obra/superpowers 7.0.2, `systematic-debugging/find-polluter.sh` | MIT (`vendor/debug/LICENSE`) | Copyright (c) 2025 Jesse Vincent | None. |
 
+## Third-party skills installed outside the plugin (not bundled)
+
+- Leonxlnx/taste-skill 2.5.1 (MIT), `design-taste-frontend`, installed at user level on 2026-11-12.
+- Jakubantalik/transitions.dev (own licence, free for personal and commercial use, no redistribution of the library), `transitions-dev` and `transitions-polish`, installed at user level on 2026-11-12.
+- DavidHDev/react-bits (MIT + Commons Clause): referenced only; not installed.
+
+`skills/tal/references/web.md` says how they combine with the identity. Nothing from them is copied into this plugin.
+
 ## Ideas adapted into the references
 
 Wording in `skills/tal/references/*.md` was rewritten in the T.A.L. style. Sources used for ideas and numbers:
 
 - **MIT / Apache-2.0, adapted:** obra/superpowers (testing, debugging, verification, subagent practice), anthropics/skills (skill-creator, frontend-design, mcp-builder, webapp-testing), kajisho5/ffmpeg-skill, Leonxlnx/taste-skill, morluto/rea (reverse engineering evidence rules), thedotmack/claude-mem (handoff and layered recall; Apache-2.0), DietrichGebert/ponytail 5.3.3 (MIT, Copyright (c) 2026 DietrichGebert; the option ladder and shortcut-comment rule in `code.md`, "The smallest complete change"; its hooks, task-board ledger, webhook and levels were not adopted).
+- **MIT, adapted (grill.md):** mattpocock/skills, `grilling` (rounds of numbered questions over a design tree, a recommended answer on each, facts looked up instead of asked). Wording rewritten. The original is also installed at user level as `grill-me` and `grilling` (2026-11-13).
 - **CC-BY-SA-4.0, paraphrased only, no text copied:** trailofbits/skills (differential-review, fp-check, dwarf-expert). Ideas credited to Trail of Bits.
 - **No licence found, facts only, no prose copied:** apple-design, mobile-design, native-app-designer, anthropics doc-coauthoring.
 

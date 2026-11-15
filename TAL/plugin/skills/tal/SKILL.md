@@ -1,6 +1,6 @@
 ---
 name: tal
-description: T.A.L. (Totally Accurate Labs) working standard. Use for coding, debugging, testing, video or motion work, UI, reverse engineering, agents and model choice, token cost, memory, writing skills or plugins, user-facing text, and before declaring any work done.
+description: T.A.L. (Totally Accurate Labs) working standard. Use for coding, debugging, testing, video or motion work, UI, websites and landing pages, stress-testing a plan (grilling), reverse engineering, agents and model choice, token cost, memory, writing skills or plugins, user-facing text, and before declaring any work done.
 ---
 
 # T.A.L.
@@ -23,6 +23,8 @@ description: T.A.L. (Totally Accurate Labs) working standard. Use for coding, de
 | Video and audio editing | `video.md` |
 | Motion graphics rendered to video | `motion.md` |
 | Interface, gesture, layout, app motion | `ui.md` |
+| Websites and landing pages (taste-skill, transitions.dev, React Bits) | `web.md` |
+| Stress-test a plan, "grill me", interview the owner before building | `grill.md` |
 | Colour, font, logo, identity, audit | `brand.md` |
 | Reverse engineering | `reverse.md` |
 | Agents, workflows, model choice | `agents.md` |

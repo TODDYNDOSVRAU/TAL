@@ -92,6 +92,9 @@ test('router names the right references, and stays silent otherwise', () => {
   assert.match(route('crie um agente que triagem logs'), /agents\.md/);
   assert.match(route('animação com Remotion'), /motion\.md/);
   assert.match(route('muda a cor do botão'), /ui\.md/);
+  assert.match(route('grill me sobre esse plano'), /grill\.md/);
+  assert.match(route('me entreviste antes de começar o projeto'), /grill\.md/);
+  assert.match(route('faça várias perguntas sobre o projeto'), /grill\.md/);
   assert.strictEqual(route('obrigado'), '');
   assert.strictEqual(route('/compact'), '');
   assert.strictEqual(route('oi'), '');
@@ -142,6 +145,14 @@ const CORPUS = [
   ['cria uma skill nova para revisar PRs', ['authoring']],
   ['melhora o SKILL.md e roda os evals', ['authoring']],
   ['escreve um MCP server para o Notion', ['authoring']],
+  // Main product (T.A.R.K.A.S.) and websites: these returned [] before 2.1.2.
+  ['o equalizador está com clipping no DSP', ['code']],
+  ['reduce latency of AudioTrack', ['code']],
+  ['escreve o texto do erro de disco cheio', ['voice']],
+  ['refina a animação do mini player', ['ui'], ['motion']],
+  ['monta a página do site da T.A.L. em html', ['web']],
+  ['faz uma landing page para o T.A.R.K.A.S.', ['web']],
+  ['write the error handling code in parser.ts', ['code'], ['voice']],
   ['esse hook não dispara', []],
   ['instala o plugin', []],
   ['qual a diferença entre skill e plugin?', ['authoring']],
@@ -159,6 +170,14 @@ test('router corpus: fires on evidence, silent on loose words', () => {
     for (const d of not) if (got.includes(d)) fails.push(`${JSON.stringify(prompt)} wrongly fired ${d}`);
   }
   assert.deepStrictEqual(fails, []);
+});
+
+test('every reference file has a route', () => {
+  const { RULES } = require(path.join(ROOT, 'hooks', 'route.js'));
+  const domains = new Set(RULES.map((r) => r[0]));
+  const refs = fs.readdirSync(path.resolve(__dirname, '..', 'references')).filter((f) => f.endsWith('.md')).map((f) => f.slice(0, -3));
+  assert.deepStrictEqual(refs.filter((r) => !domains.has(r)), [], 'references no route reaches');
+  assert.deepStrictEqual([...domains].filter((d) => !refs.includes(d)), [], 'routes to missing references');
 });
 
 test('router lists at most three references', () => {
@@ -199,6 +218,53 @@ test('memory-lint: accents, block scalars, updated date, relative dates, secrets
   assert.ok(r.info.some((x) => /\[\[nowhere\]\]/.test(x)));
   assert.ok(r.warnings.some((x) => /leak\.md: looks like it contains a secret/.test(x)));
   assert.ok(r.warnings.some((x) => /is not "- \[Title\]/.test(x)), 'index line without hook');
+});
+
+const talProject = () => {
+  const d = project(tmp());
+  fs.writeFileSync(path.join(d, 'CLAUDE.md'), '# T.A.L. — Totally Accurate Labs\n');
+  return d;
+};
+const transcript = (dir, files) => {
+  const t = path.join(dir, 'session.jsonl');
+  const rows = files.map((f) => JSON.stringify({ type: 'assistant', message: { content: [{ type: 'tool_use', name: 'Edit', input: { file_path: f } }] } }));
+  fs.writeFileSync(t, ['{"type":"summary"}', 'not json "tool_use"', ...rows].join('\n') + '\n');
+  return t;
+};
+
+test('stop hook: blocks only on files this session changed', () => {
+  const { check } = require(path.join(ROOT, 'hooks', 'stop-check.js'));
+  const d = talProject();
+  const mine = path.join(d, 'Mine.kt');
+  const theirs = path.join(d, 'Theirs.kt');
+  fs.writeFileSync(mine, 'val c = Color(0xFFC7FF32)\n');
+  fs.writeFileSync(theirs, 'val c = Color(0xFFC7FF32)\n');
+  const r = check({ cwd: d, transcript_path: transcript(d, [mine]) });
+  assert.strictEqual(r.decision, 'block');
+  assert.match(r.reason, /Mine\.kt/);
+  assert.doesNotMatch(r.reason, /Theirs\.kt/);
+  assert.strictEqual(check({ cwd: d, transcript_path: transcript(d, [theirs.replace('Theirs', 'Clean')]) }), null);
+  assert.strictEqual(check({ cwd: d, stop_hook_active: true, transcript_path: transcript(d, [mine]) }), null);
+  assert.strictEqual(check({ cwd: project(tmp()), transcript_path: transcript(d, [mine]) }), null, 'not a T.A.L. project');
+  const plug = talProject();
+  fs.mkdirSync(path.join(plug, '.claude-plugin'));
+  fs.writeFileSync(path.join(plug, '.claude-plugin', 'plugin.json'), '{"name":"tal"}');
+  const own = path.join(plug, 'hooks', 'detector.js');
+  fs.mkdirSync(path.dirname(own));
+  fs.writeFileSync(own, "const RETIRED = '#C7FF32';\n");
+  assert.strictEqual(check({ cwd: plug, transcript_path: transcript(plug, [own]) }), null, 'the plugin\'s own detector files are skipped');
+});
+
+test('session start: criterion only in T.A.L. projects', () => {
+  const { lines } = require(path.join(ROOT, 'hooks', 'session-start.js'));
+  assert.deepStrictEqual(lines(tmp()), [], 'plain folder stays silent');
+  const ign = project(tmp());
+  fs.writeFileSync(path.join(ign, '.tal-ignore'), '');
+  assert.deepStrictEqual(lines(ign), [], '.tal-ignore stays silent');
+  const out = lines(project(tmp()));
+  assert.match(out[0], /created the standard block/);
+  assert.match(out[1], /before adding, removing/);
+  assert.match(lines(talProject()).join('\n'), /before adding, removing/);
 });
 
 test('every reference path in SKILL.md exists', () => {

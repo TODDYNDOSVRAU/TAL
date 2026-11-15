@@ -37,7 +37,7 @@ The identity covers what things look like. This file covers how they are structu
 11. **Frame smoothness.** Animate transform and alpha, and in Compose read animated state in the layout or draw phase (`graphicsLayer {}`, `offset {}`, `drawBehind {}`), not in composition. The per-frame cost of the Haze blur is unmeasured: measure it.
 12. **Materials.** Translucent chrome (tab bar, mini player) floats over content. Never stack light translucent surfaces. Tint with the identity base. Animate blur and scale together on enter and exit.
 13. **Feedback, three senses.** Causality (the feedback matches the event that caused it), harmony (visual, sound and haptic fire on the same frame), utility (only at meaningful moments). Four kinds: status, completion, warning, error; validate inline, not on submit.
-14. **Reduced motion.** Respect three signals: reduced motion (cross-fade, no overshoot), reduced transparency (solid surfaces, no blur), more contrast (defined borders). Keep opacity and colour changes that aid comprehension. Vestibular triggers to avoid regardless: full-screen moving backgrounds, slow looping oscillation near 0.2 Hz, abrupt brightness jumps (ease theme changes), large objects moving at full opacity (make them semi-transparent while they travel).
+14. **Accessibility signals.** Respect two signals: reduced transparency (solid surfaces, no blur) and more contrast (defined borders). There is no reduced-motion path: the owner removed that rule on 2026-11-12 and motion on screen is the top priority (`C:\dev\CLAUDE.md`). Vestibular triggers to avoid regardless: full-screen moving backgrounds, slow looping oscillation near 0.2 Hz, abrupt brightness jumps (ease theme changes), large objects moving at full opacity (make them semi-transparent while they travel).
 15. **Typography craft.** Tracking is size-specific: tighten large headings (≈ −0.02 em), keep body near 0. Leading shrinks as size grows. Hierarchy comes from weight + size + leading together. Layout scales with the system font size (sp, not fixed dp for text).
 16. **Orientation.** Each screen answers: where am I, where can I go, what is here, how do I leave.
 
@@ -50,7 +50,6 @@ The identity covers what things look like. This file covers how they are structu
 | Spring with bounce (damping 0.8) | `spring(dampingRatio = 0.8f, ...)` only after a flick |
 | Velocity handoff | `Animatable.animateTo(target, initialVelocity = releaseVelocity)` |
 | `backdrop-filter` material | the existing Haze setup (`hazeEffect`), tinted with `TalInk…` or `TarkasIce` tokens, not custom colours |
-| `prefers-reduced-motion` | the existing `rememberReducedMotion()` helper |
 | `prefers-reduced-transparency` | the existing reduce-transparency setting |
 
 Stiffness is derived from the response: `stiffness = (2π / response)²` (Compose's spring has unit mass and no `response` parameter; that term is SwiftUI's). Compose constants: stiffness VeryLow 50, Low 200, MediumLow 400 (enter/exit default), Medium 1500 (default); damping NoBouncy 1.0, LowBouncy 0.75, MediumBouncy 0.5, HighBouncy 0.2.
@@ -64,7 +63,7 @@ Stiffness is derived from the response: `stiffness = (2π / response)²` (Compos
 - [ ] Colours are identity tokens only, no ad-hoc hex in a screen. Accent is Ice on dark, Deep Teal on light. No lime, no blue on light.
 - [ ] Logo is a single colour and is not animated with an accent.
 - [ ] Type uses Space Grotesk, Inter or JetBrains Mono, with size-specific tracking.
-- [ ] Reduced-motion and reduced-transparency paths exist and were tested.
+- [ ] Reduced-transparency and increased-contrast paths exist and were tested.
 - [ ] Both themes were tested, not inferred from one. Scrims are measured against the real background.
 - [ ] Sticky bars and overlays never cover the focused element.
 - [ ] Copy follows the voice rules. Errors say what to do.
@@ -116,19 +115,19 @@ Premium comes from restraint and consistency, not effects.
 
 **Platform.** Edge-to-edge is enforced from targetSdk 35. Custom back callbacks stop the system predictive-back animation. Decide layout by window size.
 
-**Accessibility (WCAG AA minimum).** Text contrast 4.5:1 (3:1 for large text); UI components and state indicators 3:1 (WCAG 1.4.11, verified). Computed for this palette: `#8C8C8C` on `#080808` 5.96; `#6B6B6B` on `#F2F2F0` 4.75; Ice on black 13.41; Deep Teal on `#F2F2F0` 5.49; Ice on `#F2F2F0` 1.33. Focus appearance (2.4.13) is AAA; a visible focus indicator at 3:1 is the AA-level practice. Don't use colour alone to carry meaning. Respect font scaling, reduced motion, reduced transparency, increased contrast. Give every control a label.
+**Accessibility (WCAG AA minimum).** Text contrast 4.5:1 (3:1 for large text); UI components and state indicators 3:1 (WCAG 1.4.11, verified). Computed for this palette: `#8C8C8C` on `#080808` 5.96; `#6B6B6B` on `#F2F2F0` 4.75; Ice on black 13.41; Deep Teal on `#F2F2F0` 5.49; Ice on `#F2F2F0` 1.33. Focus appearance (2.4.13) is AAA; a visible focus indicator at 3:1 is the AA-level practice. Don't use colour alone to carry meaning. Respect font scaling, reduced transparency, increased contrast. Give every control a label.
 
 **Consistency.** Same thing, same look and behaviour everywhere. Reuse the component; a new pattern needs a reason.
 
 **Performance is design.** Animate transform and opacity; read animated state in layout or draw, not composition. Frame budget: 16.7 ms at 60 Hz, 11.1 ms at 90 Hz, 8.3 ms at 120 Hz; a frame over budget is dropped, not delayed (slow > 16 ms, frozen > 700 ms). Avoid layout in scroll. Measure on a mid-range device, release build, Baseline Profile. Strong skipping is the default from Kotlin 2.0.20, so blanket `@Stable` or immutable collections can cost more than they save: check the Compose compiler reports first.
 
-**Craft test.** Squint: is the hierarchy clear? Switch theme. Slow the animation 5x. Turn on reduced motion. Scale text to 200%. Grab any animation mid-flight and reverse it. Walk every control with TalkBack. View a greyscale screenshot: is meaning carried by colour alone?
+**Craft test.** Squint: is the hierarchy clear? Switch theme. Slow the animation 5x. Scale text to 200%. Grab any animation mid-flight and reverse it. Walk every control with TalkBack. View a greyscale screenshot: is meaning carried by colour alone?
 
-**Review script (objective).** Count taps and decisions for the top 3 tasks (none worse than before). Measure contrast for every text/UI pair and every control size. Fill the state matrix with screenshots, in reduced motion, reduced transparency, increased contrast, light and dark. Record p90/p99 frame time for list scroll, player expand and EQ drag on a release build. Inject offline, missing file and full disk: each message must state cause and remedy. For web output, run `scripts/vendor/lint/lint.mjs` (also scans `.kt` and `.xml`).
+**Review script (objective).** Count taps and decisions for the top 3 tasks (none worse than before). Measure contrast for every text/UI pair and every control size. Fill the state matrix with screenshots, in reduced transparency, increased contrast, light and dark. Record p90/p99 frame time for list scroll, player expand and EQ drag on a release build. Inject offline, missing file and full disk: each message must state cause and remedy. For web output, run `scripts/vendor/lint/lint.mjs` (also scans `.kt` and `.xml`).
 
 ## Larger companion skills
 
 - **frontend-design** (anthropics/skills, via example-skills, installed, disabled; Apache-2.0): plan, review, build, critique loop. Its list of generic "AI tells" includes *a near-black background with a single bright accent* and *a monospace face for small data labels*. That describes the T.A.L. identity. Its own rule is that the brief's words always win, and here the identity is the brief, so those two traits are decisions, not defaults. Its other tells (cream and terracotta, identical rounded cards, an eyebrow above every heading, "→" on every link) still count.
-- **ui-ux-pro-max** (MIT, installed, disabled) and **taste-skill** (MIT, installed, disabled): methods and checklists only. Their palettes, font lists and style libraries never apply. Rejected: taste-skill's mandatory motion layer (fails a page with fewer than eight moving elements) and its 600–1600 ms reveals, because motion here has a purpose and a 300 ms cap; its bans on monospace, hairlines and glass, because the identity uses JetBrains Mono for metrics, hairline borders for elevation and Haze materials.
+- **ui-ux-pro-max** (MIT, installed, disabled) and **taste-skill** (MIT, active at user level as `design-taste-frontend`, used for websites through `web.md`): methods and checklists only; this file covers apps. Their palettes, font lists and style libraries never apply. Rejected: taste-skill's mandatory motion layer (fails a page with fewer than eight moving elements) and its 600–1600 ms reveals, because motion here has a purpose and a 300 ms cap; its bans on monospace, hairlines and glass, because the identity uses JetBrains Mono for metrics, hairline borders for elevation and Haze materials.
 
 The identity and the rules in this file win on conflict.

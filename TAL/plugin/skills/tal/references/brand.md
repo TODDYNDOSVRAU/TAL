@@ -7,7 +7,7 @@ Audit a project against the T.A.L. identity v1.2. Source of truth: `C:\dev\TAL\i
 - **Palette** below; accent about 5% of a composition, only for active, ready or attention. Signal Lime `#C7FF32` is retired.
 - **Type:** Space Grotesk for titles and identity, Inter for interface and body, JetBrains Mono for code and metrics.
 - **Logo:** one colour, never the accent; official files only.
-- **Motion:** 150–300 ms, decelerating, honours reduced motion.
+- **Motion:** 150–300 ms, decelerating. Motion is the top priority; the reduced-motion rule was removed by the owner on 2026-11-12.
 - **Layers:** every product has ESSENTIAL, ADVANCED and ENGINEERING in one app; no artificially limited lite/pro versions.
 - **Fixed phrases, no new ones:** `THINK LIKE T.A.L.` · `MADE BY T.A.L.` · `EVERYTHING HAS A REASON.`
 - **Existing projects:** don't migrate colours, fonts or logo without asking; each product keeps its own accent. If a project's file contradicts the identity, follow the project and say so.
